@@ -1,9 +1,10 @@
 # ADR-002 — DNA OPERACIONAL, AUTONOMIA RAIZ E COMPROMISSO MISSION_PROVEN
 
-**Status:** ACCEPTED
+**Status:** SUPERSEDED
 **Data:** 2026-09-02
-**Decisão:** ativa e vinculante para nova implementação
+**Decisão:** histórica; substituída no DOCSET V003
 **Documento normativo associado:** `docs/architecture/POD_DNA_OPERACIONAL_V001.md`
+**Substituído por:** ADR-003, ADR-005 e ADR-008
 
 ---
 

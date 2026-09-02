@@ -1,0 +1,220 @@
+{
+  "schema_version": "2.0",
+  "document_set_id": "POD-DOCSET-V003",
+  "status": "ACTIVE",
+  "generated_at": "2026-09-02T18:19:27-03:00",
+  "supersedes": [
+    "POD-DOCSET-V002",
+    "POD-2026-09-02"
+  ],
+  "canonical_document_count": 18,
+  "set_hash_algorithm": {
+    "name": "SHA-256",
+    "encoding": "UTF-8",
+    "line_format": "<order>\\t<document_id>\\t<path>\\t<size_bytes>\\t<sha256_hex>\\n",
+    "ordering": "order ascending",
+    "manifest_included": false
+  },
+  "set_hash": "sha256:1290bc91c5917bb9d0c17af4f210767d430d37956b9ee529225ab1327989a83c",
+  "implementation_status_claimed": false,
+  "documents": [
+    {
+      "order": 1,
+      "document_id": "POD-DOC-001",
+      "path": "docs/POD_INDICE_MESTRE_V003.md",
+      "document_type": "MASTER_DOCUMENT_INDEX",
+      "authority_level": "A1",
+      "version": "3.0.0",
+      "status": "ACTIVE",
+      "size_bytes": 8626,
+      "sha256": "sha256:31c032bc3a9f9e72045caa5e32287161ea9e55a43e8b8e8b5b857b3db7b2ff9e"
+    },
+    {
+      "order": 2,
+      "document_id": "POD-DOC-002",
+      "path": "docs/baselines/POD_BASELINE_V003_2026-09-02.md",
+      "document_type": "ARCHITECTURE_BASELINE",
+      "authority_level": "A1",
+      "version": "3.0.0",
+      "status": "ACTIVE",
+      "size_bytes": 10856,
+      "sha256": "sha256:8db4f319d833b74336f1ebefae3c1b3dc501a2ff441a12e41fdc833c3f70096e"
+    },
+    {
+      "order": 3,
+      "document_id": "POD-DOC-003",
+      "path": "docs/architecture/POD_DNA_OPERACIONAL_V002.md",
+      "document_type": "OPERATIONAL_DNA",
+      "authority_level": "A1",
+      "version": "2.0.0",
+      "status": "ACTIVE",
+      "size_bytes": 5011,
+      "sha256": "sha256:d2fe192e30e7d0f7bea29d8db641e81a936072c77daffd67e8a83f22e32f8622"
+    },
+    {
+      "order": 4,
+      "document_id": "POD-DOC-004",
+      "path": "docs/specifications/POD_PROJETO_CONCEITUAL_V002.md",
+      "document_type": "CONCEPTUAL_PROJECT",
+      "authority_level": "A2",
+      "version": "2.0.0",
+      "status": "ACTIVE",
+      "size_bytes": 8998,
+      "sha256": "sha256:16c1d3281f82a4c124d2b4233fe67e7e2d802e5fda9faaf27319020ab22ca493"
+    },
+    {
+      "order": 5,
+      "document_id": "POD-DOC-005",
+      "path": "docs/architecture/POD_ARQUITETURA_TECNICA_V002.md",
+      "document_type": "TECHNICAL_ARCHITECTURE",
+      "authority_level": "A2",
+      "version": "2.0.0",
+      "status": "ACTIVE",
+      "size_bytes": 12299,
+      "sha256": "sha256:c8eb072a61f4e0e130334bb3c5609207c3b4b93214befe454553d9b61cac02e8"
+    },
+    {
+      "order": 6,
+      "document_id": "POD-DOC-006",
+      "path": "docs/specifications/POD_CONTRATOS_DADOS_ESTADOS_V002.md",
+      "document_type": "CONTRACT_DATA_STATE_SPECIFICATION",
+      "authority_level": "A2",
+      "version": "2.0.0",
+      "status": "ACTIVE",
+      "size_bytes": 18594,
+      "sha256": "sha256:bf212a9949b22de8b7c3c2d530a8544b36ed3ff088ea7f92f0fc1f60ab86e027"
+    },
+    {
+      "order": 7,
+      "document_id": "POD-DOC-007",
+      "path": "docs/specifications/POD_SEGURANCA_AUTORIZACOES_V002.md",
+      "document_type": "SECURITY_AUTHORIZATION_SPECIFICATION",
+      "authority_level": "A1",
+      "version": "2.0.0",
+      "status": "ACTIVE",
+      "size_bytes": 10391,
+      "sha256": "sha256:a13a87b2c984799dd0c347d2ef09977ae49d2d57bd5f24c9f67b498f45ce2d7d"
+    },
+    {
+      "order": 8,
+      "document_id": "POD-DOC-008",
+      "path": "docs/specifications/POD_REQUISITOS_RASTREABILIDADE_V002.md",
+      "document_type": "TRACEABILITY_MATRIX",
+      "authority_level": "A3",
+      "version": "2.0.0",
+      "status": "ACTIVE",
+      "size_bytes": 19424,
+      "sha256": "sha256:6c51e49b488cc4462088e7c4463465a99ee428f449e70d38e32cce0bc0e9cfbe"
+    },
+    {
+      "order": 9,
+      "document_id": "POD-DOC-009",
+      "path": "docs/specifications/POD_PLANO_MESTRE_CONSTRUCAO_V002.md",
+      "document_type": "MASTER_BUILD_PLAN",
+      "authority_level": "A3",
+      "version": "2.0.0",
+      "status": "ACTIVE",
+      "size_bytes": 11191,
+      "sha256": "sha256:b9ad2aa55b3fe5f09e88815db03ede4fa5789826cf679750f4e2ccc2edae56b0"
+    },
+    {
+      "order": 10,
+      "document_id": "POD-DOC-010",
+      "path": "docs/specifications/POD_PLANO_TESTES_ACEITE_V002.md",
+      "document_type": "MASTER_TEST_PLAN",
+      "authority_level": "A3",
+      "version": "2.0.0",
+      "status": "ACTIVE",
+      "size_bytes": 12688,
+      "sha256": "sha256:7145bddf05afa00662061b929342fca3b18f437cb26a7ae05878baecc49b618b"
+    },
+    {
+      "order": 11,
+      "document_id": "POD-DOC-011",
+      "path": "docs/governance/POD_GOVERNANCA_DOCUMENTAL_V003.md",
+      "document_type": "GOVERNANCE_SPECIFICATION",
+      "authority_level": "A2",
+      "version": "3.0.0",
+      "status": "ACTIVE",
+      "size_bytes": 6920,
+      "sha256": "sha256:ec3bd9667aa758c24e58a9011fb43bfc35c925e623bdf67455c0ffb6e1f9efbc"
+    },
+    {
+      "order": 12,
+      "document_id": "POD-DOC-012",
+      "path": "docs/adr/README.md",
+      "document_type": "ADR_INDEX",
+      "authority_level": "A2",
+      "version": "1.0.0",
+      "status": "ACTIVE",
+      "size_bytes": 1625,
+      "sha256": "sha256:2b7381c855055f640f58a40c9a54726cbc437526c0079058e7bf32f08943694e"
+    },
+    {
+      "order": 13,
+      "document_id": "POD-ADR-003",
+      "path": "docs/adr/ADR-003-AUTORIDADE-DE-PROVA-E-TRANSICAO-DE-MISSAO.md",
+      "document_type": "ARCHITECTURE_DECISION",
+      "authority_level": "A2",
+      "version": "1.0.0",
+      "status": "ACCEPTED",
+      "size_bytes": 3630,
+      "sha256": "sha256:e40d2c483a81f8f4ed64725443f43c5a79180f4dff4e29e2f96663f6f2557215"
+    },
+    {
+      "order": 14,
+      "document_id": "POD-ADR-004",
+      "path": "docs/adr/ADR-004-PERSISTENCIA-ATOMICA-JOURNAL-E-OUTBOX.md",
+      "document_type": "ARCHITECTURE_DECISION",
+      "authority_level": "A2",
+      "version": "1.0.0",
+      "status": "ACCEPTED",
+      "size_bytes": 3823,
+      "sha256": "sha256:046000fbcd82f48f2dcb65eed48f326919bf59b0ccf01283edfae7bae93d49c4"
+    },
+    {
+      "order": 15,
+      "document_id": "POD-ADR-005",
+      "path": "docs/adr/ADR-005-PORTOES-HUMANOS-E-DEPENDENCIAS-EXTERNAS.md",
+      "document_type": "ARCHITECTURE_DECISION",
+      "authority_level": "A1",
+      "version": "1.0.0",
+      "status": "ACCEPTED",
+      "size_bytes": 3702,
+      "sha256": "sha256:a1a38c7deb5a45932e69487ef3174a9070e1cce768142d2d7c47bd1af069c15f"
+    },
+    {
+      "order": 16,
+      "document_id": "POD-ADR-006",
+      "path": "docs/adr/ADR-006-LEASE-FENCING-TEMPO-E-DELEGACAO-OFFLINE.md",
+      "document_type": "ARCHITECTURE_DECISION",
+      "authority_level": "A2",
+      "version": "1.0.0",
+      "status": "ACCEPTED",
+      "size_bytes": 3595,
+      "sha256": "sha256:465f17a18f80e8bc800752c55239c9fd81e66002ae494633a9dfc4362b23fe0b"
+    },
+    {
+      "order": 17,
+      "document_id": "POD-ADR-007",
+      "path": "docs/adr/ADR-007-NUCLEO-DE-SEGURANCA-DESDE-A-FUNDACAO.md",
+      "document_type": "ARCHITECTURE_DECISION",
+      "authority_level": "A1",
+      "version": "1.0.0",
+      "status": "ACCEPTED",
+      "size_bytes": 3139,
+      "sha256": "sha256:e9a37bd45cbe51ef517315c430aa734b6a9659fb1c87b28d93daa04608b4335a"
+    },
+    {
+      "order": 18,
+      "document_id": "POD-ADR-008",
+      "path": "docs/adr/ADR-008-MULTIPROJETO-FEDERACAO-E-SUPERSESSAO-DA-TOPOLOGIA-ANTERIOR.md",
+      "document_type": "ARCHITECTURE_DECISION",
+      "authority_level": "A2",
+      "version": "1.0.0",
+      "status": "ACCEPTED",
+      "size_bytes": 3729,
+      "sha256": "sha256:9647367e85bc1e6412f5f4c385afebf9f8f37c6392a8d9de5aab827e4a1451fa"
+    }
+  ]
+}

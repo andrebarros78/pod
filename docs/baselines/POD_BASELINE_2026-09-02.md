@@ -2,9 +2,11 @@
 
 **Identificador:** POD-2026-09-02
 **Tipo:** BASELINE_TAG_RECORD
-**Status:** CONSOLIDATED
+**Status:** SUPERSEDED
 **Data:** 2026-09-02
 **Produto:** POD — Plataforma Orquestradora Durável
+**Substituído por:** POD_BASELINE_V003_2026-09-02.md
+**Uso:** histórico e rastreabilidade; não orienta implementação nova
 
 ---
 
