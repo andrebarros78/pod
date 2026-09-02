@@ -890,3 +890,197 @@ Aprovação não significa que as lacunas já estejam resolvidas ou implementada
 ### INCORPORADO EM
 
 Registro Vivo mestre. Deve ser tratado como checklist obrigatório da consolidação arquitetural final.
+
+---
+
+## MEM-POD-20260902-011
+
+**DATA:** 02/09/2026  
+**TIPO:** CAPABILITY / RULE_CANDIDATE / DELIVERY_REQUIREMENT / ARCHITECTURAL_INSIGHT  
+**STATUS:** CANDIDATE  
+**NORMATIVO:** NÃO
+
+### TEXTO ORIGINAL
+
+> o painel não é enfeite ele precisa ser funcional
+
+### INTERPRETAÇÃO TÉCNICA
+
+O Painel do POD deve ser tratado como **console operacional visual funcional**, e não como dashboard decorativo ou camada de apresentação criada apenas ao final da construção.
+
+Regra central:
+
+```text
+PAINEL POD
+=
+OBSERVAR
++ COMANDAR
++ DIAGNOSTICAR
++ INTERVIR
++ COMPROVAR
+
+PAINEL POD
+!=
+ENFEITE
+```
+
+O Painel deve ser uma das primeiras entregas incrementais funcionais, construída depois da fundação persistente e do Core operacional mínimo, e deve evoluir junto com o restante do POD.
+
+Sequência candidata:
+
+```text
+1. FUNDAÇÃO PERSISTENTE MÍNIMA
+2. CORE OPERACIONAL MÍNIMO
+3. PAINEL OPERACIONAL FUNCIONAL
+4. EVOLUÇÃO DOS DEMAIS COMPONENTES
+5. PAINEL EVOLUI JUNTO COM CADA CAPACIDADE
+```
+
+A primeira versão do Painel não deve ser mock visual. Mesmo simples, deve consumir estado real e comandar o runtime real por contratos oficiais.
+
+### CAPACIDADES MÍNIMAS DA PRIMEIRA ENTREGA FUNCIONAL
+
+O Painel deve permitir observar, conforme já existir no runtime:
+
+```text
+SYSTEM
+- health funcional real
+- versão
+- serviços/componentes essenciais
+
+MISSIONS
+- mission_id
+- estado
+- progresso real
+- etapa atual
+- bloqueios
+- condição de MISSION_PROVEN
+
+EVIDENCE
+- checkpoints
+- testes
+- evidências/provas
+
+FEDERATION
+- nós
+- ONLINE / READY / DEGRADED
+- capabilities
+- recursos
+
+CONTROL
+- pause
+- resume
+- recovery
+- demais comandos autorizados conforme contratos existentes
+```
+
+Conforme o POD evoluir, o Painel deve incorporar operação e visibilidade de Governador, Rede Federada, recursos, segurança, incidentes, aprovações, Learning & Training, Engenharia de Construção, backups, atualizações e demais capacidades relevantes.
+
+### REGRAS DE AUTORIDADE DO PAINEL
+
+O Painel não é fonte da verdade.
+
+```text
+PAINEL LÊ
+→ Read Models / estado soberano
+
+PAINEL COMANDA
+→ Command API
+→ Core
+→ política
+→ persistência
+→ execução
+
+PAINEL RECEBE
+→ eventos reais
+```
+
+É proibido tratar como arquitetura normal:
+
+```text
+Painel → editar banco soberano diretamente
+Painel → matar processos diretamente
+Painel → escrever configuração soberana diretamente
+Painel → inventar ou inferir status sem prova
+```
+
+Fechar o navegador ou o Painel não pode interromper missões:
+
+```text
+FECHAR O PAINEL != PARAR O POD
+```
+
+Ao reabrir, o Painel deve reconstruir sua visão a partir do estado persistido/read models e reconectar ao fluxo de eventos.
+
+### GATES CANDIDATOS DO PAINEL
+
+```text
+PANEL_REAL_STATE_GATE
+→ toda informação operacional exibida deve ser derivada de estado/evidência real
+
+PANEL_COMMAND_PATH_GATE
+→ todo comando mutável deve passar pelo Core/Command API/política aplicável
+
+PANEL_NO_DIRECT_DB_MUTATION_GATE
+→ nenhuma mutação soberana direta pelo frontend
+
+PANEL_CLOSE_CONTINUITY_GATE
+→ fechar/reabrir painel não interrompe missão e recupera estado corretamente
+
+PANEL_OPERATIONAL_COVERAGE_GATE
+→ capacidades operacionais relevantes do POD devem possuir visibilidade/controle apropriados no Painel quando aplicável
+```
+
+Princípios de aceite:
+
+```text
+SE O PAINEL MOSTRA ALGO QUE NÃO CONSEGUE PROVAR
+→ FALHA
+
+SE O PAINEL OFERECE COMANDO QUE NÃO PASSA PELO CORE
+→ FALHA
+
+SE O POD POSSUI FUNÇÃO OPERACIONAL IMPORTANTE
+MAS O OPERADOR NÃO CONSEGUE OBSERVÁ-LA QUANDO NECESSÁRIO
+→ LACUNA DO PAINEL
+```
+
+### MOTIVAÇÃO
+
+Dar ao operador uma visão verdadeira e capacidade real de controle desde as primeiras fases da construção, permitir diagnóstico e validação do próprio desenvolvimento do POD e impedir que a interface seja adicionada tardiamente como decoração desacoplada do runtime.
+
+### IMPACTO POSSÍVEL
+
+- prioridade de entrega do Painel logo após fundação persistente/Core mínimo;
+- necessidade precoce de Read Models, Query API, Command API e stream de eventos;
+- evolução incremental do Painel junto com os módulos;
+- uso do Painel como instrumento de verdade operacional, diagnóstico, recovery, evidência e intervenção por exceção;
+- testes E2E do Painel contra estado real.
+
+### DEPENDÊNCIAS
+
+- Fundação Neutra/Persistência mínima;
+- Core operacional mínimo;
+- contratos de comando, evento, estado, health e evidência;
+- Read Models e projeções reconstruíveis;
+- segurança/autorização das ações do Painel.
+
+### CONFLITOS POSSÍVEIS
+
+Não deve contrariar MEM-003: o Painel definitivo não precisa ser congelado cedo. A decisão atual é construir **um Painel Operacional Mínimo funcional cedo**, mantendo sua arquitetura evolutiva até a consolidação final.
+
+Também não deve transformar o Painel em fonte soberana, Supervisor, Executor ou banco de dados.
+
+### RELAÇÕES COM OUTRAS MEMÓRIAS
+
+Relaciona-se com MEM-003 (Fundação Neutra), MEM-005 (verdade operacional e simplicidade para o usuário), MEM-008 (Rede Federada) e MEM-010 (fechamento de contratos arquiteturais).
+
+### DECISÃO FINAL
+
+**APROVADO PELO PROPRIETÁRIO: O PAINEL É UMA DAS PRIMEIRAS ENTREGAS FUNCIONAIS DO POD E DEVE OPERAR SOBRE O RUNTIME REAL, NÃO SER UM ENFEITE.**
+
+Aprovação conceitual não equivale a implementação, teste ou baseline.
+
+### INCORPORADO EM
+
+Registro Vivo mestre. Deve ser incluído na consolidação arquitetural, no plano de construção e na matriz de testes/rastreabilidade do POD.
