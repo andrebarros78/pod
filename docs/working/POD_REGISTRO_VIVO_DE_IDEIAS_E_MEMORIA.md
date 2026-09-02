@@ -79,3 +79,58 @@ INCORPORADO EM:
 
 # MEMÓRIAS
 
+## MEM-POD-20260902-001
+
+**DATA:** 02/09/2026  
+**TIPO:** PRINCIPLE / CAPABILITY  
+**STATUS:** CAPTURED  
+**NORMATIVO:** NÃO
+
+### TEXTO ORIGINAL
+
+> O que tem de bom em LMCP e WMCP será integralmente incorporado.
+
+### INTERPRETAÇÃO TÉCNICA
+
+Na consolidação final do POD, todas as capacidades, mecanismos, comportamentos, soluções, contratos, estratégias de recuperação, persistência, supervisão, execução, segurança, testes, ferramentas, evidências e lições tecnicamente boas e comprovadas existentes nos projetos doadores devem ser inventariadas e absorvidas pelo POD.
+
+A incorporação integral significa preservar o valor técnico e funcional comprovado, não copiar cegamente defeitos, acoplamentos, nomenclaturas, caminhos, dependências ou decisões superadas.
+
+O resultado deve ser capacidade nativa do POD, com identidade, contratos, testes e arquitetura próprios.
+
+### MOTIVAÇÃO
+
+Evitar perda do investimento técnico, das soluções já comprovadas e das lições aprendidas nos projetos doadores durante a construção do POD.
+
+### IMPACTO POSSÍVEL
+
+- inventário completo de capacidades dos projetos doadores;
+- matriz de equivalência entre capacidades existentes e módulos futuros do POD;
+- preservação de comportamentos comprovados por testes de regressão;
+- fusão de implementações equivalentes;
+- aperfeiçoamento de mecanismos existentes antes da incorporação;
+- absorção em Cérebro, Coração, Memória, Federação, motores, segurança, recovery, observabilidade e ferramentas do POD conforme pertinência;
+- criação futura de gates que provem que nenhuma capacidade útil foi perdida na migração.
+
+### DEPENDÊNCIAS
+
+- acesso ao código, documentação, testes e evidências dos projetos doadores;
+- inventário técnico completo;
+- definição da arquitetura final do POD;
+- critérios objetivos para classificar uma capacidade como boa, comprovada, redundante, defeituosa ou superada.
+
+### CONFLITOS POSSÍVEIS
+
+Pode conflitar com a regra ZERO DONOR COUPLING se "incorporação integral" for interpretada como dependência direta ou cópia estrutural do projeto doador. A interpretação correta é absorção integral do valor técnico, mantendo zero dependência de runtime, build, configuração, nomenclatura, caminho ou serviço doador no POD final.
+
+### RELAÇÕES COM OUTRAS MEMÓRIAS
+
+Relaciona-se com o princípio de preservação, comparação, fusão, aperfeiçoamento, teste, regressão, migração e comprovação antes de aposentar qualquer capacidade existente.
+
+### DECISÃO FINAL
+
+PENDENTE DE CONSOLIDAÇÃO DA ARQUITETURA FINAL.
+
+### INCORPORADO EM
+
+Ainda não incorporado em arquitetura normativa.
