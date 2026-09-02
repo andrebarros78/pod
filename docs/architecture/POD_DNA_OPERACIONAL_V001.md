@@ -1,9 +1,11 @@
 # POD — DNA OPERACIONAL SOBERANO — V001
 
-**Status:** ACTIVE
+**Status:** SUPERSEDED
 **Data:** 2026-09-02
 **Produto:** POD — Plataforma Orquestradora Durável
 **Escopo:** invariantes raiz de missão, autonomia, autoridade, conhecimento e execução
+**Substituído por:** POD_DNA_OPERACIONAL_V002.md
+**Uso:** histórico e rastreabilidade; não orienta implementação nova
 
 ---
 
