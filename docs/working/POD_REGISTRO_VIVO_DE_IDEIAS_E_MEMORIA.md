@@ -575,29 +575,29 @@ Registro Vivo mestre; detalhamento preservado no anexo citado.
 **STATUS:** CANDIDATE  
 **NORMATIVO:** NÃO
 
-### TEXTO ORIGINAL
+### TEXTO ORIGINAL / INTENÇÃO DO USUÁRIO
 
-> rede federado hoje tem 4 nós, amanha pode ser 10, depois 20, depos 3, depis 9, depois 1 ou seja ela tem quer ser adaptavel, rapida de facil conexão, um PC entra automaticamente todas as ferramentas estão libaradas para uso, basta o operadopor ordenar, execute missão PC 1 ou PC 3, Use PC X para essa tarefa etc....
+> A Rede Federada pode ter hoje 4 nós, amanhã 10, depois 20, depois 3, 9 ou apenas 1. Ela deve ser adaptável, rápida e de fácil conexão. Ao colocar um PC na rede, ele deve entrar automaticamente, descobrir e liberar suas ferramentas para uso conforme as políticas do POD. O operador deve poder ordenar de forma simples: “execute missão no PC 1”, “use PC 3 para esta tarefa”, “use PC X”, sem precisar lidar com IP, porta, SSH, PID ou configuração técnica.
 
 ### INTERPRETAÇÃO TÉCNICA
 
-A Rede Federada do POD deve ser elástica, autoformável, Plug-and-Federate e orientada por capabilities. A quantidade de nós é estado operacional, não topologia fixa.
+A Rede Federada do POD deve ser uma malha elástica de nós dinâmicos, autoformável e orientada por capacidades, na qual a quantidade de nós é estado operacional e não parte fixa da arquitetura.
 
-Cada nó candidato inclui identidade estável, Node Agent permanente, transporte outbound persistente e multiplexado, Node Inbox durável, `ACK != RESULT`, health funcional, descoberta automática de ferramentas, Fast Path/Governed Path, eventos push sem polling no hot path, journal/checkpoint local, idempotência, lease/generation/fencing, reconciliação, autorrecuperação, telemetria e bridges de capability.
+```text
+FEDERATION_SIZE = N
+N pode variar dinamicamente: 1 → 4 → 10 → 20 → 3 → 9 → 1
+```
 
-Mecanismos de fluidez aprovados incluem Micro-Scheduler local autorizado, hot capability cache, node affinity, prewarming, delta sync, command batching seguro, priority lanes, latency-aware routing, local result cache, ACK em duas camadas e latency budget por estágio.
+Adicionar ou remover nós não deve exigir alteração arquitetural, recompilação de topologia, reconfiguração manual de rotas ou recadastro manual de ferramentas.
 
-Princípios:
+Princípio central:
 
 ```text
 ADICIONOU UM NÓ = ADICIONOU CAPACIDADE AO POD
 REMOVEU UM NÓ != PERDEU A MISSÃO
-NO_PER_COMMAND_CONNECTION = TRUE
-NO_HOT_PATH_POLLING = TRUE
-DATA_MOVEMENT_MINIMIZED = TRUE
 ```
 
-Detalhamento:
+O detalhamento integral permanece preservado no anexo:
 
 `docs/working/MEM-POD-20260902-008_REDE_FEDERADA_ELASTICA_FAST_PATH_E_FLUIDEZ.md`
 
@@ -658,43 +658,15 @@ PERMANENTLY_LOADED = FALSE
 A ferramenta possui dois modos distintos:
 
 ```text
-LEARNING
-→ o POD adquire, valida, pratica, prova e mantém competência para si
-
-TRAINING
-→ o POD transfere, especializa, testa e comprova competência em alvo externo autorizado
+LEARNING → o POD adquire, valida, pratica, prova e mantém competência para si
+TRAINING → o POD transfere, especializa, testa e comprova competência em alvo externo autorizado
 ```
 
 Definição de aprendizado:
 
 ```text
-APRENDER
-!= LER E ARMAZENAR
-
-APRENDER
-= COMPREENDER
-+ VALIDAR
-+ EXPERIMENTAR
-+ OPERAR
-+ REPETIR
-+ FALHAR
-+ RECUPERAR
-+ EXPLICAR
-+ DOCUMENTAR
-+ MEMORIZAR
-+ MANTER ATUALIZADO
-+ PROVAR
-```
-
-Definição de treinamento:
-
-```text
-TREINAR
-= TRANSFERIR COMPETÊNCIA
-+ TESTAR O ALVO
-+ CORRIGIR GAPS
-+ RETESTAR
-+ PROVAR
+APRENDER != LER E ARMAZENAR
+APRENDER = COMPREENDER + VALIDAR + EXPERIMENTAR + OPERAR + REPETIR + FALHAR + RECUPERAR + EXPLICAR + DOCUMENTAR + MEMORIZAR + MANTER ATUALIZADO + PROVAR
 ```
 
 Capacidades aprovadas para absorção nativa, sujeitas a contrato e prova: Curriculum Manager; Knowledge Plane; Epistemic Integrity; Source Dependency Graph; Experience Plane; Action→Effect; State Graph/State Novelty; trajetórias; Procedure Synthesis; Deterministic Replay; Failure & Recovery Learning; Permanent Operational Memory; Change Monitor; Local Relearning; Competence Proof; Training Eligibility; Training Plane; escolha automática do método de especialização; provider/model agnostic; evidência e verificação independente.
@@ -708,13 +680,9 @@ A arquitetura interna candidata será tratada em quatro planos conceituais:
 4. TRAINING PLANE
 ```
 
-A ferramenta pode consumir capacidades da Rede Federada para pesquisa, validação independente, experimentação, replay e testes, mas não é proprietária da Federação nem adquire soberania adicional.
-
 Conhecimento adquirido não cria autorização:
 
 `KNOWLEDGE != AUTHORITY`
-
-Fonte técnica principal analisada nesta decisão: `PROJETO_TECNICO_IMPLANTACAO_LEARNING_AND_TRAINING_TOOL_V1(1).md`, originalmente especificado para WMCP e aceito somente como fonte doadora de comportamento/capacidade.
 
 ### MOTIVAÇÃO
 
@@ -722,41 +690,27 @@ Transformar aprendizado do POD em competência operacional comprovada, persisten
 
 ### IMPACTO POSSÍVEL
 
-- integração com Cérebro, Memória, Engenharia de Construção, Rede Federada, Segurança, Evidências e recursos;
-- criação de contratos de `learning_project`, currículo, competência, trajetória, replay, recovery, staleness e assessment;
-- capacidade de detectar mudança e reaprender apenas o ramo afetado;
-- prova objetiva de competência antes de uso operacional.
+Integração com Cérebro, Memória, Engenharia de Construção, Rede Federada, Segurança, Evidências e recursos.
 
 ### DEPENDÊNCIAS
 
-- contratos neutros POD;
-- Memória soberana;
-- ferramentas/adapters autorizados;
-- políticas de segurança e dados;
-- gates de competência e evidência;
-- Rede Federada quando usada para paralelismo/validação.
+Contratos neutros POD, Memória soberana, ferramentas/adapters autorizados, políticas de segurança/dados, gates de competência/evidência e Rede Federada quando aplicável.
 
 ### CONFLITOS POSSÍVEIS
 
-- não incorporar nomenclatura/dependência de projeto doador;
-- não permitir que conteúdo aprendido se transforme em política ou autoridade;
-- não confundir LEARNING com TRAINING;
-- não transformar a ferramenta em serviço pesado permanente do Core;
-- não declarar competência sem replay, evidência e gates aplicáveis.
+Não incorporar identidade de projeto doador, não permitir que conteúdo aprendido vire política/autoridade, não confundir LEARNING com TRAINING e não declarar competência sem replay/evidência/gates.
 
 ### RELAÇÕES COM OUTRAS MEMÓRIAS
 
-Relaciona-se com MEM-001, MEM-003, MEM-005, MEM-008 e com a Biblioteca de Conhecimento e Engenharia de Construção do POD.
+Relaciona-se com MEM-001, MEM-003, MEM-005 e MEM-008.
 
 ### DECISÃO FINAL
 
-**APROVADO PELO PROPRIETÁRIO PARA FAZER PARTE DA ARQUITETURA A SER CONSOLIDADA DO POD.**
-
-Aprovação conceitual não equivale a implementação, teste, prova ou baseline.
+APROVADO PELO PROPRIETÁRIO PARA FAZER PARTE DA ARQUITETURA A SER CONSOLIDADA DO POD.
 
 ### INCORPORADO EM
 
-Registro Vivo mestre. A incorporação normativa ocorrerá somente na consolidação arquitetural/ADR/baseline correspondente.
+Registro Vivo mestre. A incorporação normativa ocorrerá somente na consolidação arquitetural correspondente.
 
 ---
 
@@ -773,123 +727,37 @@ Registro Vivo mestre. A incorporação normativa ocorrerá somente na consolida�
 
 ### INTERPRETAÇÃO TÉCNICA
 
-Ficam aprovadas para fechamento durante a consolidação arquitetural seis lacunas identificadas após o cruzamento da documentação existente com as decisões atuais do POD.
+Ficam aprovadas para fechamento durante a consolidação arquitetural seis lacunas: soberania durante partição da Rede Federada; mobilidade de workspace/dados/artefatos entre nós; ciclo de vida da frota federada; Product Delivery Contract; economia de execução/orçamento técnico; consolidação formal de Learning & Training.
 
-#### LACUNA 1 — SOBERANIA DURANTE PARTIÇÃO DA REDE FEDERADA
-
-Definir autoridade inequívoca sobre `mission_id`, `task/work_unit`, `attempt_id`, `command_id`, `checkpoint_id`, `artifact_id`, ACK, RESULT e geração quando coordenador e nó divergem após queda ou partição.
-
-Deve cobrir split-brain, tentativa antiga, resultado entregue parcialmente, fencing e regra de reconciliação.
-
-#### LACUNA 2 — MOBILIDADE DE WORKSPACE, DADOS E ARTEFATOS ENTRE NÓS
-
-Definir cópia soberana, Writer Lease, replicação, delta sync, hashes, promoção de artefato, conflito, transferência segura, classificação de dados e regras para segredos/dados restritos.
-
-#### LACUNA 3 — CICLO DE VIDA DA FROTA FEDERADA
-
-Formalizar:
-
-```text
-JOIN
-→ ENROLL
-→ READY
-→ DRAIN
-→ LEAVE
-→ REVOKE
-```
-
-Incluir atualização gradual de Node Agents, negociação de versão/capability, compatibilidade, rollback e bloqueio seguro de nó incompatível.
-
-#### LACUNA 4 — PRODUCT DELIVERY CONTRACT
-
-Definir contrato final de entrega por tipo de produto, incluindo conforme aplicável:
-
-```text
-artefato
-versão
-hash
-SBOM
-instalação
-configuração
-migração
-backup
-rollback
-documentação
-security proof
-recovery proof
-evidence pack
-```
-
-O contrato deve integrar os gates de `MISSION_PROVEN`/`PRODUCT_MISSION_PROVEN`.
-
-#### LACUNA 5 — ECONOMIA DE EXECUÇÃO E ORÇAMENTO TÉCNICO
-
-Separar e governar:
-
-```text
-custo financeiro
-custo computacional
-tempo
-consumo de API/tokens
-rede
-disco
-energia/recursos dos nós
-```
-
-O Cérebro/Governador deve poder selecionar estratégia e nó considerando custo técnico total, sem ultrapassar gasto financeiro não autorizado.
-
-#### LACUNA 6 — CONSOLIDAÇÃO FORMAL DE LEARNING & TRAINING
-
-Formalizar na arquitetura POD a separação:
-
-```text
-LEARNING = POD aprende para si
-TRAINING = POD transfere/especializa competência em alvo externo
-```
-
-A direção desta lacuna passa a estar conceitualmente resolvida por MEM-POD-20260902-009, restando contratos, integração, gates, rastreabilidade e prova de implementação.
+O detalhamento e a resolução conceitual posterior estão preservados em MEM-POD-20260902-013.
 
 ### MOTIVAÇÃO
 
-Fechar ambiguidades que podem produzir split-brain, inconsistência distribuída, artefatos conflitantes, incompatibilidade de nós, entrega incompleta, desperdício de recursos ou aprendizado sem contrato claro.
+Fechar ambiguidades que poderiam produzir split-brain, inconsistência distribuída, artefatos conflitantes, incompatibilidade de nós, entrega incompleta, desperdício de recursos ou aprendizado sem contrato claro.
 
 ### IMPACTO POSSÍVEL
 
-- contratos distribuídos da Federação;
-- Memória e persistência;
-- Túnel Core;
-- Governador e Resource Governance;
-- Engines/Node Agents;
-- Engenharia de Construção e entrega;
-- Learning & Training Tool;
-- segurança e classificação de dados;
-- testes de falha, compatibilidade, performance e aceite.
+Federação, Memória, Túnel Core, Governador, Engines, Engenharia de Construção, Learning & Training, segurança e testes.
 
 ### DEPENDÊNCIAS
 
-- MEM-008 Rede Federada;
-- MEM-009 Learning & Training Tool;
-- 14 requisitos fundamentais;
-- Segurança do POD e Segurança do Produto;
-- contratos de identidade, lease/fencing, evidência e `MISSION_PROVEN`.
+MEM-008, MEM-009, 14 requisitos fundamentais, Segurança do POD/Produto e contratos futuros de identidade, lease/fencing, evidência e MISSION_PROVEN.
 
 ### CONFLITOS POSSÍVEIS
 
-As seis lacunas devem ser fechadas sem congelar tecnologia específica desnecessariamente e sem reintroduzir acoplamento de projetos doadores.
+Fechar sem congelar tecnologia específica e sem reintroduzir acoplamento de projetos doadores.
 
 ### RELAÇÕES COM OUTRAS MEMÓRIAS
 
-Relaciona-se especialmente com MEM-003, MEM-005, MEM-007, MEM-008 e MEM-009.
+Relaciona-se especialmente com MEM-003, MEM-005, MEM-007, MEM-008, MEM-009 e MEM-013.
 
 ### DECISÃO FINAL
 
-**APROVADO PELO PROPRIETÁRIO COMO CONJUNTO DE LACUNAS OBRIGATÓRIAS A SEREM FECHADAS ANTES DO CONGELAMENTO DA ARQUITETURA.**
-
-Aprovação não significa que as lacunas já estejam resolvidas ou implementadas.
+APROVADO PELO PROPRIETÁRIO COMO CONJUNTO DE LACUNAS OBRIGATÓRIAS; FECHAMENTO CONCEITUAL REGISTRADO EM MEM-013.
 
 ### INCORPORADO EM
 
-Registro Vivo mestre. Deve ser tratado como checklist obrigatório da consolidação arquitetural final.
+Registro Vivo mestre; problema histórico preservado e resolução conceitual referenciada.
 
 ---
 
@@ -911,17 +779,8 @@ O Painel do POD deve ser tratado como **console operacional visual funcional**, 
 Regra central:
 
 ```text
-PAINEL POD
-=
-OBSERVAR
-+ COMANDAR
-+ DIAGNOSTICAR
-+ INTERVIR
-+ COMPROVAR
-
-PAINEL POD
-!=
-ENFEITE
+PAINEL POD = OBSERVAR + COMANDAR + DIAGNOSTICAR + INTERVIR + COMPROVAR
+PAINEL POD != ENFEITE
 ```
 
 O Painel deve ser uma das primeiras entregas incrementais funcionais, construída depois da fundação persistente e do Core operacional mínimo, e deve evoluir junto com o restante do POD.
@@ -940,147 +799,243 @@ A primeira versão do Painel não deve ser mock visual. Mesmo simples, deve cons
 
 ### CAPACIDADES MÍNIMAS DA PRIMEIRA ENTREGA FUNCIONAL
 
-O Painel deve permitir observar, conforme já existir no runtime:
-
 ```text
-SYSTEM
-- health funcional real
-- versão
-- serviços/componentes essenciais
-
-MISSIONS
-- mission_id
-- estado
-- progresso real
-- etapa atual
-- bloqueios
-- condição de MISSION_PROVEN
-
-EVIDENCE
-- checkpoints
-- testes
-- evidências/provas
-
-FEDERATION
-- nós
-- ONLINE / READY / DEGRADED
-- capabilities
-- recursos
-
-CONTROL
-- pause
-- resume
-- recovery
-- demais comandos autorizados conforme contratos existentes
+SYSTEM → health funcional real, versão, serviços/componentes essenciais
+MISSIONS → mission_id, estado, progresso real, etapa, bloqueios, MISSION_PROVEN
+EVIDENCE → checkpoints, testes, evidências/provas
+FEDERATION → nós, ONLINE/READY/DEGRADED, capabilities, recursos
+CONTROL → pause, resume, recovery e comandos autorizados existentes
 ```
-
-Conforme o POD evoluir, o Painel deve incorporar operação e visibilidade de Governador, Rede Federada, recursos, segurança, incidentes, aprovações, Learning & Training, Engenharia de Construção, backups, atualizações e demais capacidades relevantes.
 
 ### REGRAS DE AUTORIDADE DO PAINEL
 
-O Painel não é fonte da verdade.
-
 ```text
-PAINEL LÊ
-→ Read Models / estado soberano
-
-PAINEL COMANDA
-→ Command API
-→ Core
-→ política
-→ persistência
-→ execução
-
-PAINEL RECEBE
-→ eventos reais
+PAINEL LÊ → Read Models / estado soberano
+PAINEL COMANDA → Command API → Core → política → persistência → execução
+PAINEL RECEBE → eventos reais
 ```
 
-É proibido tratar como arquitetura normal:
-
-```text
-Painel → editar banco soberano diretamente
-Painel → matar processos diretamente
-Painel → escrever configuração soberana diretamente
-Painel → inventar ou inferir status sem prova
-```
-
-Fechar o navegador ou o Painel não pode interromper missões:
+É proibido o Painel editar banco soberano diretamente, matar processos diretamente, escrever configuração soberana diretamente ou inventar status sem prova.
 
 ```text
 FECHAR O PAINEL != PARAR O POD
 ```
 
-Ao reabrir, o Painel deve reconstruir sua visão a partir do estado persistido/read models e reconectar ao fluxo de eventos.
-
 ### GATES CANDIDATOS DO PAINEL
 
 ```text
 PANEL_REAL_STATE_GATE
-→ toda informação operacional exibida deve ser derivada de estado/evidência real
-
 PANEL_COMMAND_PATH_GATE
-→ todo comando mutável deve passar pelo Core/Command API/política aplicável
-
 PANEL_NO_DIRECT_DB_MUTATION_GATE
-→ nenhuma mutação soberana direta pelo frontend
-
 PANEL_CLOSE_CONTINUITY_GATE
-→ fechar/reabrir painel não interrompe missão e recupera estado corretamente
-
 PANEL_OPERATIONAL_COVERAGE_GATE
-→ capacidades operacionais relevantes do POD devem possuir visibilidade/controle apropriados no Painel quando aplicável
-```
-
-Princípios de aceite:
-
-```text
-SE O PAINEL MOSTRA ALGO QUE NÃO CONSEGUE PROVAR
-→ FALHA
-
-SE O PAINEL OFERECE COMANDO QUE NÃO PASSA PELO CORE
-→ FALHA
-
-SE O POD POSSUI FUNÇÃO OPERACIONAL IMPORTANTE
-MAS O OPERADOR NÃO CONSEGUE OBSERVÁ-LA QUANDO NECESSÁRIO
-→ LACUNA DO PAINEL
 ```
 
 ### MOTIVAÇÃO
 
-Dar ao operador uma visão verdadeira e capacidade real de controle desde as primeiras fases da construção, permitir diagnóstico e validação do próprio desenvolvimento do POD e impedir que a interface seja adicionada tardiamente como decoração desacoplada do runtime.
+Dar ao operador visão verdadeira e capacidade real de controle desde as primeiras fases e impedir que a interface seja adicionada tardiamente como decoração desacoplada do runtime.
 
 ### IMPACTO POSSÍVEL
 
-- prioridade de entrega do Painel logo após fundação persistente/Core mínimo;
-- necessidade precoce de Read Models, Query API, Command API e stream de eventos;
-- evolução incremental do Painel junto com os módulos;
-- uso do Painel como instrumento de verdade operacional, diagnóstico, recovery, evidência e intervenção por exceção;
-- testes E2E do Painel contra estado real.
+Prioridade de entrega precoce, Read Models, Query API, Command API, stream de eventos e testes E2E contra estado real.
 
 ### DEPENDÊNCIAS
 
-- Fundação Neutra/Persistência mínima;
-- Core operacional mínimo;
-- contratos de comando, evento, estado, health e evidência;
-- Read Models e projeções reconstruíveis;
-- segurança/autorização das ações do Painel.
+Fundação persistente/Core mínimo, contratos de comando/evento/estado/health/evidência, Read Models e segurança/autorização.
 
 ### CONFLITOS POSSÍVEIS
 
-Não deve contrariar MEM-003: o Painel definitivo não precisa ser congelado cedo. A decisão atual é construir **um Painel Operacional Mínimo funcional cedo**, mantendo sua arquitetura evolutiva até a consolidação final.
-
-Também não deve transformar o Painel em fonte soberana, Supervisor, Executor ou banco de dados.
+Não contraria MEM-003: o Painel definitivo não precisa ser congelado cedo; a decisão é construir um Painel Operacional Mínimo funcional cedo e evoluí-lo.
 
 ### RELAÇÕES COM OUTRAS MEMÓRIAS
 
-Relaciona-se com MEM-003 (Fundação Neutra), MEM-005 (verdade operacional e simplicidade para o usuário), MEM-008 (Rede Federada) e MEM-010 (fechamento de contratos arquiteturais).
+Relaciona-se com MEM-003, MEM-005, MEM-008 e MEM-010.
 
 ### DECISÃO FINAL
 
-**APROVADO PELO PROPRIETÁRIO: O PAINEL É UMA DAS PRIMEIRAS ENTREGAS FUNCIONAIS DO POD E DEVE OPERAR SOBRE O RUNTIME REAL, NÃO SER UM ENFEITE.**
-
-Aprovação conceitual não equivale a implementação, teste ou baseline.
+APROVADO PELO PROPRIETÁRIO: O PAINEL É UMA DAS PRIMEIRAS ENTREGAS FUNCIONAIS DO POD E DEVE OPERAR SOBRE O RUNTIME REAL, NÃO SER UM ENFEITE.
 
 ### INCORPORADO EM
 
-Registro Vivo mestre. Deve ser incluído na consolidação arquitetural, no plano de construção e na matriz de testes/rastreabilidade do POD.
+Registro Vivo mestre. Deve entrar na consolidação arquitetural, plano de construção e matriz de testes/rastreabilidade.
+
+---
+
+## MEM-POD-20260902-012
+
+**DATA:** 02/09/2026  
+**TIPO:** ARCHITECTURAL_INSIGHT / CAPABILITY / RULE_CANDIDATE  
+**STATUS:** CANDIDATE  
+**NORMATIVO:** NÃO
+
+### TEXTO ORIGINAL
+
+> arquitetura Vai ser hibrida, com compatibilidade com todos os provedores de IA A Api fica no cerebro do sistema.
+
+Decisão posterior:
+
+> Provado: oito pontos para essa arquitetura híbrida, POD será híbrido e multi-provider por definição
+
+### INTERPRETAÇÃO TÉCNICA
+
+O POD será **híbrido e multi-provider por definição**. Provedores e modelos de IA são recursos cognitivos substituíveis consumidos pelo Cérebro; nenhum provedor/modelo é o Cérebro nem adquire autoridade soberana.
+
+```text
+AI_PROVIDER_API_OWNER = POD_BRAIN
+PROVIDER_LOCK_IN = FALSE
+MODEL_AGNOSTIC = TRUE
+CONTEXT_OWNED_BY_POD = TRUE
+PROVIDER != POD BRAIN
+MODEL != OPERATIONAL AUTHORITY
+```
+
+Os oito mecanismos aprovados são:
+
+1. Provider Capability Registry;
+2. normalização de contratos;
+3. Context Portability;
+4. Policy Router antes do Provider Router;
+5. health funcional de modelos/provedores;
+6. versionamento e regressão de modelos;
+7. Shadow/Challenger Evaluation orientado por risco;
+8. degradação cognitiva controlada.
+
+Arbitragem de respostas divergentes pertence ao Cérebro e deve usar requisitos, evidência, testabilidade, histórico relevante e experimentos/testes quando possível, nunca votação cega.
+
+Credenciais permanecem no Vault/Secret Broker por `SecretRef`, não no estado cognitivo.
+
+Detalhamento integral:
+
+`docs/working/MEM-POD-20260902-012_ARQUITETURA_HIBRIDA_MULTI_PROVIDER_CEREBRO.md`
+
+### MOTIVAÇÃO
+
+Garantir soberania cognitiva, substituição de fornecedores, failover, privacidade, controle de custo/latência e evolução futura sem reescrever o POD.
+
+### IMPACTO POSSÍVEL
+
+Cérebro, contexto, providers, Vault, Learning & Training, segurança, economia de execução e evidência cognitiva.
+
+### DEPENDÊNCIAS
+
+Policy, classificação de dados, Vault, Context Engine, Provider Adapters e métricas de qualidade/latência/custo.
+
+### CONFLITOS POSSÍVEIS
+
+Nenhum provider pode assumir autoridade do Cérebro; resultado de modelo não é política nem autorização.
+
+### RELAÇÕES COM OUTRAS MEMÓRIAS
+
+Relaciona-se com MEM-005, MEM-007, MEM-009, MEM-010 e MEM-013.
+
+### DECISÃO FINAL
+
+APROVADO PELO PROPRIETÁRIO COMO DIREÇÃO CONCEITUAL PARA CONSOLIDAÇÃO.
+
+### INCORPORADO EM
+
+Registro Vivo mestre; detalhamento preservado no anexo citado.
+
+---
+
+## MEM-POD-20260902-013
+
+**DATA:** 02/09/2026  
+**TIPO:** ARCHITECTURAL_INSIGHT / RULE_CANDIDATE / CONSTRAINT / CONSOLIDATION_INPUT  
+**STATUS:** CANDIDATE  
+**NORMATIVO:** NÃO
+
+### TEXTO ORIGINAL
+
+> Correto, faça a correção, feche as lacunas e registre
+
+### INTERPRETAÇÃO TÉCNICA
+
+A auditoria conceitual ponta a ponta identificou lacunas e sobreposições antes da consolidação dos contratos e da documentação normativa. O proprietário aprovou sua correção e fechamento conceitual.
+
+Não serão criados novos grandes órgãos apenas para resolvê-las. As sobreposições ficam normalizadas:
+
+```text
+CORAÇÃO = agrupamento/metáfora da governança operacional; não segundo Governador
+TÚNEL CORE = substrato de transporte/conectividade da Rede Federada
+SISTEMA IMUNOLÓGICO = mecanismo ativo de Segurança; não segunda Policy
+POLICY/CONSTITUIÇÃO = autoridade transversal de limites; não conhecimento nem modelo de IA
+```
+
+Foram fechadas conceitualmente 24 áreas:
+
+1. matriz soberana de autoridade;
+2. Constituição/Policy;
+3. precedência decisão × segurança × recursos;
+4. ciclo de vida completo da missão;
+5. pause/drain/cancel/preempt/rollback/compensate;
+6. planejamento × engenharia × scheduling × roteamento;
+7. modelo de consistência por classe de estado;
+8. ordenação/event delivery com at-least-once + idempotência + dedup + reconciliação;
+9. tempo distribuído com UTC + monotonic + sequence/generation;
+10. soberania durante partição/fencing;
+11. mobilidade de workspace/dados/artefatos por manifesto/hash/Writer Lease/promotion;
+12. ciclo de vida da frota JOIN→ENROLL→TRUST/COMPAT→READY→DRAIN→LEAVE→REVOKE;
+13. trust bootstrap, rotação e revogação de identidade de nó;
+14. envelope restrito de delegação do Micro-Scheduler;
+15. fairness multiprojeto, quotas, burst e starvation prevention;
+16. escopos explícitos de compartilhamento entre projetos;
+17. arquitetura híbrida/multi-provider;
+18. arbitragem cognitiva por evidência/teste, não maioria;
+19. integração Learning & Training sem promoção direta para Policy/Authority;
+20. Product Delivery Contract com gates aplicáveis;
+21. self-update side-by-side com known-good/rollback;
+22. prova independente separada de quem construiu;
+23. definição objetiva de progresso real;
+24. economia de execução por custo total da missão, não paralelismo máximo.
+
+Invariantes resultantes:
+
+```text
+NO_COMPETING_SOVEREIGN_AUTHORITIES = TRUE
+POLICY_PRECEDES_TECHNICAL_ACTION = TRUE
+ONE_AUTHORITATIVE_GENERATION_PER_MUTABLE_SCOPE = TRUE
+STALE_GENERATION_CANNOT_COMMIT = TRUE
+CACHE_IS_NOT_SOURCE_OF_TRUTH = TRUE
+DISCOVERY_IS_NOT_TRUST = TRUE
+PROJECT_SCOPE_IS_EXPLICIT = TRUE
+PROVIDER_IS_NOT_BRAIN = TRUE
+KNOWLEDGE_IS_NOT_POLICY = TRUE
+BUILDER_IS_NOT_SOLE_VERIFIER = TRUE
+ACTIVITY_IS_NOT_PROGRESS = TRUE
+MORE_PARALLELISM_IS_NOT_ALWAYS_MORE_EFFICIENT = TRUE
+```
+
+O detalhamento integral das decisões e limites de cada uma das 24 áreas está preservado em:
+
+`docs/working/MEM-POD-20260902-013_FECHAMENTO_DAS_LACUNAS_DA_AUDITORIA_CONCEITUAL.md`
+
+### MOTIVAÇÃO
+
+Eliminar ambiguidades conceituais antes de transformar o projeto em contratos, ADRs, schemas, implementação e testes.
+
+### IMPACTO POSSÍVEL
+
+Toda a arquitetura: missão, Cérebro, Engenharia, Governador, Memória, Federação, Engines, Segurança, Learning & Training, multi-provider, multiprojeto, entrega, self-update e prova.
+
+### DEPENDÊNCIAS
+
+Consolidação posterior em contratos e documentação normativa.
+
+### CONFLITOS POSSÍVEIS
+
+As decisões são conceituais; detalhes físicos/tecnológicos ainda não estão congelados e devem preservar ZERO DONOR COUPLING.
+
+### RELAÇÕES COM OUTRAS MEMÓRIAS
+
+Fecha conceitualmente MEM-010 e se relaciona com MEM-005, MEM-007, MEM-008, MEM-009, MEM-011 e MEM-012.
+
+### DECISÃO FINAL
+
+APROVADO PELO PROPRIETÁRIO PARA CORRIGIR E FECHAR AS LACUNAS DO PROJETO CONCEITUAL ANTES DA CONSOLIDAÇÃO DOS CONTRATOS E DA DOCUMENTAÇÃO NORMATIVA.
+
+Fechamento conceitual não equivale a contrato implementado, teste, prova ou baseline.
+
+### INCORPORADO EM
+
+Registro Vivo mestre; detalhamento preservado no anexo citado.
