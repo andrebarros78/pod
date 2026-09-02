@@ -194,3 +194,143 @@ PENDENTE DE CONSOLIDAÇÃO DA ARQUITETURA FINAL.
 ### INCORPORADO EM
 
 Ainda não incorporado em arquitetura normativa.
+
+---
+
+## MEM-POD-20260902-003
+
+**DATA:** 02/09/2026  
+**TIPO:** ARCHITECTURAL_INSIGHT / RULE_CANDIDATE / CAPABILITY  
+**STATUS:** CAPTURED  
+**NORMATIVO:** NÃO
+
+### TEXTO ORIGINAL
+
+> O que podemos implementar diretamente no codigo fonte de POD?
+
+Decisão de trabalho associada: iniciar somente por uma fundação neutra, formada por invariantes, contratos, primitivas, portas, testes e gates de baixo arrependimento, evitando congelar prematuramente a topologia dos grandes componentes.
+
+### INTERPRETAÇÃO TÉCNICA
+
+Durante a fase de concepção, o código-fonte do POD pode receber componentes cujo valor permaneça válido independentemente da arquitetura final. A implementação inicial deve se concentrar no DNA técnico transversal e evitar decisões prematuras sobre a distribuição definitiva de responsabilidades entre os grandes componentes.
+
+Candidatos de baixo arrependimento para implementação direta:
+
+1. Identidades soberanas: `mission_id`, `project_id`, `command_id`, `event_id`, `attempt_id`, `worker_id`, `checkpoint_id`, `evidence_id`, `incident_id`, `node_id` e `correlation_id`.
+2. Separação de entidades e ciclos de vida: missão, tentativa, Worker, processo, sessão e conexão são entidades diferentes.
+3. Contratos genéricos de comando, evento, resultado, evidência e checkpoint.
+4. Idempotência e deduplicação por chave lógica.
+5. Invariante de persistir antes de confirmar.
+6. Portas/interfaces de persistência: Mission Repository, Event Store, State Store, Checkpoint Store, Evidence Store, Idempotency Store, Inbox e Outbox.
+7. Lease, generation e fencing token para rejeitar mutação obsoleta.
+8. Health funcional multidimensional: LIVENESS, READINESS e PROGRESS.
+9. Taxonomia de falhas que separa falha de tentativa, ferramenta, Worker, teste, serviço e estratégia de conclusão terminal da missão.
+10. Checkpoints versionados, verificáveis, persistentes e reconciliáveis.
+11. Modelo canônico de evidências com hash e proveniência.
+12. Motor genérico de prova de conclusão, culminando em `MISSION_PROVEN` somente quando todos os gates obrigatórios forem satisfeitos.
+13. Primitivas de segurança para segredo, referência de segredo e redaction centralizada.
+14. Abstração de relógio com UTC para auditoria e monotônico para duração, lease, timeout, heartbeat e backoff.
+15. Primitivas reutilizáveis de retry, backoff, circuit breaker e restart budget.
+16. Contratos de recursos e capacidade, incluindo snapshots e decisões ADMIT/DEFER/THROTTLE, sem implementar ainda o Governador completo.
+17. Gates arquiteturais de desacoplamento para impedir dependência indevida de projetos doadores.
+18. Estrutura inicial de testes unitários, de contrato, arquitetura, resiliência, recovery e segurança.
+
+Estrutura física candidata, ainda não normativa:
+
+```text
+src/pod/
+├── domain/
+│   ├── ids.py
+│   ├── mission.py
+│   ├── command.py
+│   ├── event.py
+│   ├── attempt.py
+│   ├── checkpoint.py
+│   ├── evidence.py
+│   ├── health.py
+│   ├── lease.py
+│   ├── fencing.py
+│   ├── errors.py
+│   └── proof.py
+├── ports/
+│   ├── persistence.py
+│   ├── execution.py
+│   ├── privileged_execution.py
+│   ├── clock.py
+│   ├── storage.py
+│   └── telemetry.py
+└── primitives/
+    ├── retry.py
+    ├── backoff.py
+    ├── circuit_breaker.py
+    ├── redaction.py
+    └── hashing.py
+```
+
+Testes candidatos:
+
+```text
+tests/
+├── unit/
+├── contract/
+├── architecture/
+├── resilience/
+├── recovery/
+└── security/
+```
+
+### MOTIVAÇÃO
+
+Permitir que a construção do POD avance enquanto a arquitetura final continua em evolução, reduzindo retrabalho e evitando que decisões prematuras sobre componentes, processos, banco de dados, conectividade ou topologia obriguem futuras reescritas extensas.
+
+### IMPACTO POSSÍVEL
+
+- criação futura de uma Fase 0 de Fundação Neutra;
+- estabelecimento precoce de contratos estáveis e invariantes de domínio;
+- possibilidade de testar durabilidade, idempotência, fencing, health, evidência e prova antes da topologia definitiva;
+- redução do custo de mudanças arquiteturais posteriores;
+- base comum para absorção das capacidades tecnicamente comprovadas dos projetos doadores.
+
+### NÃO IMPLEMENTAR AINDA COMO TOPOLOGIA FINAL
+
+Enquanto a arquitetura estiver em concepção, evitar congelar diretamente no código:
+
+- Governador completo;
+- Cérebro completo;
+- Memória física definitiva;
+- Túnel Core definitivo;
+- Sistema Imunológico definitivo;
+- Federação definitiva;
+- Gateway definitivo;
+- topologia e quantidade final de processos/serviços;
+- banco de dados concreto como dependência de domínio;
+- Scheduler completo;
+- topologia final de Workers;
+- Learning & Training Tool definitiva;
+- Provider Manager definitivo;
+- Painel definitivo.
+
+Esses elementos podem receber interfaces e contratos neutros quando necessário, mas sua composição final deve aguardar a consolidação arquitetural.
+
+### DEPENDÊNCIAS
+
+- continuação da concepção arquitetural;
+- inventário e deduplicação das capacidades candidatas provenientes dos documentos técnicos analisados;
+- definição posterior dos limites dos grandes componentes do POD;
+- testes objetivos para validar cada invariante implementado.
+
+### CONFLITOS POSSÍVEIS
+
+A implementação precoce de contratos excessivamente específicos pode, mesmo dentro da Fundação Neutra, cristalizar decisões ainda não consolidadas. Portanto, qualquer código iniciado nesta fase deve minimizar dependência de infraestrutura concreta e separar domínio, portas e adaptadores.
+
+### RELAÇÕES COM OUTRAS MEMÓRIAS
+
+Relaciona-se com MEM-POD-20260902-001, pois fornece uma superfície neutra para absorção de capacidades úteis, e com MEM-POD-20260902-002, pois evita decidir prematuramente como essas capacidades serão distribuídas entre Memória, Governador, Cérebro, Túnel Core e Sistema Imunológico.
+
+### DECISÃO FINAL
+
+PENDENTE DE CONSOLIDAÇÃO DA ARQUITETURA FINAL.
+
+### INCORPORADO EM
+
+Ainda não incorporado em arquitetura normativa nem autorizado como arquitetura final.
