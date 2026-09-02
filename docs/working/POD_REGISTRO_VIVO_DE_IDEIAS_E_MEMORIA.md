@@ -134,3 +134,63 @@ PENDENTE DE CONSOLIDAÇÃO DA ARQUITETURA FINAL.
 ### INCORPORADO EM
 
 Ainda não incorporado em arquitetura normativa.
+
+---
+
+## MEM-POD-20260902-002
+
+**DATA:** 02/09/2026  
+**TIPO:** ARCHITECTURAL_INSIGHT / CAPABILITY  
+**STATUS:** CAPTURED  
+**NORMATIVO:** NÃO
+
+### TEXTO ORIGINAL
+
+> Componentes de POD: Memoria, Governador, Cerebro, Tunel Core, sistema imunologico.
+
+### INTERPRETAÇÃO TÉCNICA
+
+A composição conceitual atual do POD considera cinco componentes principais candidatos à arquitetura final:
+
+1. **Memória** — responsável por preservar conhecimento, estado, histórico, evidências, checkpoints, documentos e informações necessárias à continuidade do trabalho.
+2. **Governador** — responsável pelo controle operacional, recursos, prioridades, concorrência, supervisão, recuperação e aplicação das regras operacionais, sem ser a origem da autonomia ou autoridade técnica do POD.
+3. **Cérebro** — responsável por compreensão, raciocínio, decisão técnica, planejamento, diagnóstico, seleção de conhecimento e condução intelectual da missão.
+4. **Túnel Core** — componente candidato responsável pela conectividade durável, segura e reconciliável entre POD, nós, canais externos e capacidades distribuídas, preservando a regra de que conexão não é execução.
+5. **Sistema Imunológico** — componente candidato responsável por detectar, classificar, conter, recuperar e aprender com ameaças, anomalias, corrupção, comportamentos indevidos, falhas recorrentes e degradação operacional, sem competir com a autoridade do Cérebro ou do Governador.
+
+Essa lista representa a visão conceitual atual e poderá ser ampliada, fundida ou reorganizada durante a consolidação final.
+
+### MOTIVAÇÃO
+
+Definir os grandes órgãos funcionais do POD antes de detalhar serviços, módulos e contratos, reduzindo fragmentação prematura da arquitetura.
+
+### IMPACTO POSSÍVEL
+
+- organização da futura arquitetura por grandes componentes soberanos;
+- redefinição dos limites entre Cérebro, Governador e Sistema Imunológico;
+- consolidação de conectividade e federação sob o conceito de Túnel Core;
+- redistribuição de funções hoje espalhadas entre recovery, segurança, observabilidade, watchdog, supervisor e conectividade;
+- definição posterior de contratos explícitos entre os cinco componentes.
+
+### DEPENDÊNCIAS
+
+- definição detalhada do papel de cada componente;
+- comparação com capacidades existentes nos projetos doadores;
+- análise de sobreposição entre Governador, Sistema Imunológico, Recovery, Supervisor e Segurança;
+- definição do que pertence ao núcleo soberano e do que deve permanecer como serviço auxiliar.
+
+### CONFLITOS POSSÍVEIS
+
+Pode haver sobreposição entre Governador e Sistema Imunológico, e entre Túnel Core e conceitos anteriores de Federação, Gateway, MCP, Action e Relay. Esses conflitos não serão resolvidos agora; serão analisados na consolidação da arquitetura final.
+
+### RELAÇÕES COM OUTRAS MEMÓRIAS
+
+Relaciona-se com MEM-POD-20260902-001, pois capacidades úteis existentes nos projetos doadores poderão ser absorvidas e distribuídas entre esses componentes após inventário e comparação.
+
+### DECISÃO FINAL
+
+PENDENTE DE CONSOLIDAÇÃO DA ARQUITETURA FINAL.
+
+### INCORPORADO EM
+
+Ainda não incorporado em arquitetura normativa.
