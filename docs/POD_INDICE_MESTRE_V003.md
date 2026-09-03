@@ -1,9 +1,9 @@
 # POD — ÍNDICE MESTRE DE DOCUMENTOS E PRECEDÊNCIA — V003
 
 **Identificador:** POD-DOC-001
-**Versão:** 3.0.0
+**Versão:** 3.1.0
 **Status:** ACTIVE
-**Data:** 2026-09-02
+**Data:** 2026-09-03
 **Conjunto:** POD-DOCSET-V003
 **Autoridade:** A1 — autoridade documental
 **Substitui:** POD-DOCSET-V002 e toda baseline anterior do POD
@@ -75,6 +75,7 @@ Nenhum ADR futuro altera silenciosamente o conjunto ativo. A decisão passa a or
 | 16 | POD-ADR-006 | [ADR-006](adr/ADR-006-LEASE-FENCING-TEMPO-E-DELEGACAO-OFFLINE.md) | A2 | concorrência distribuída |
 | 17 | POD-ADR-007 | [ADR-007](adr/ADR-007-NUCLEO-DE-SEGURANCA-DESDE-A-FUNDACAO.md) | A1 | segurança desde F0 |
 | 18 | POD-ADR-008 | [ADR-008](adr/ADR-008-MULTIPROJETO-FEDERACAO-E-SUPERSESSAO-DA-TOPOLOGIA-ANTERIOR.md) | A2 | arquitetura vigente |
+| 19 | POD-ADR-009 | [ADR-009](adr/ADR-009-INDEPENDENCIA-DO-CHATGPT-IA-HIBRIDA-E-TERMINAL-SOBERANO.md) | A1 | produto próprio, IA híbrida e terminal soberano |
 
 O arquivo [POD_DOCUMENT_MANIFEST_V003.json](POD_DOCUMENT_MANIFEST_V003.json) contém tamanho e SHA-256 de todos os itens acima.
 
@@ -106,6 +107,7 @@ O arquivo [POD_DOCUMENT_MANIFEST_V003.json](POD_DOCUMENT_MANIFEST_V003.json) con
 | 22. prova independente | POD-DOC-003, ADR-003 |
 | 23. progresso real | POD-DOC-006 |
 | 24. economia e orçamento | POD-DOC-005, POD-DOC-006, POD-DOC-007 |
+| 25. independência do ChatGPT, IA híbrida e terminal próprio | ADR-009 |
 
 ## 5. Documentos substituídos
 

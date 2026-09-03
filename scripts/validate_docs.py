@@ -31,24 +31,25 @@ class Document:
 
 
 CANONICAL = (
-    Document(1, "POD-DOC-001", "docs/POD_INDICE_MESTRE_V003.md", "3.0.0", "ACTIVE", "A1", "MASTER_DOCUMENT_INDEX"),
+    Document(1, "POD-DOC-001", "docs/POD_INDICE_MESTRE_V003.md", "3.1.0", "ACTIVE", "A1", "MASTER_DOCUMENT_INDEX"),
     Document(2, "POD-DOC-002", "docs/baselines/POD_BASELINE_V003_2026-09-02.md", "3.0.0", "ACTIVE", "A1", "ARCHITECTURE_BASELINE"),
     Document(3, "POD-DOC-003", "docs/architecture/POD_DNA_OPERACIONAL_V002.md", "2.0.0", "ACTIVE", "A1", "OPERATIONAL_DNA"),
     Document(4, "POD-DOC-004", "docs/specifications/POD_PROJETO_CONCEITUAL_V002.md", "2.0.0", "ACTIVE", "A2", "CONCEPTUAL_PROJECT"),
     Document(5, "POD-DOC-005", "docs/architecture/POD_ARQUITETURA_TECNICA_V002.md", "2.0.0", "ACTIVE", "A2", "TECHNICAL_ARCHITECTURE"),
     Document(6, "POD-DOC-006", "docs/specifications/POD_CONTRATOS_DADOS_ESTADOS_V002.md", "2.0.0", "ACTIVE", "A2", "CONTRACT_DATA_STATE_SPECIFICATION"),
     Document(7, "POD-DOC-007", "docs/specifications/POD_SEGURANCA_AUTORIZACOES_V002.md", "2.0.0", "ACTIVE", "A1", "SECURITY_AUTHORIZATION_SPECIFICATION"),
-    Document(8, "POD-DOC-008", "docs/specifications/POD_REQUISITOS_RASTREABILIDADE_V002.md", "2.0.0", "ACTIVE", "A3", "TRACEABILITY_MATRIX"),
-    Document(9, "POD-DOC-009", "docs/specifications/POD_PLANO_MESTRE_CONSTRUCAO_V002.md", "2.0.0", "ACTIVE", "A3", "MASTER_BUILD_PLAN"),
-    Document(10, "POD-DOC-010", "docs/specifications/POD_PLANO_TESTES_ACEITE_V002.md", "2.0.0", "ACTIVE", "A3", "MASTER_TEST_PLAN"),
-    Document(11, "POD-DOC-011", "docs/governance/POD_GOVERNANCA_DOCUMENTAL_V003.md", "3.0.0", "ACTIVE", "A2", "GOVERNANCE_SPECIFICATION"),
-    Document(12, "POD-DOC-012", "docs/adr/README.md", "1.0.0", "ACTIVE", "A2", "ADR_INDEX"),
+    Document(8, "POD-DOC-008", "docs/specifications/POD_REQUISITOS_RASTREABILIDADE_V002.md", "2.1.0", "ACTIVE", "A3", "TRACEABILITY_MATRIX"),
+    Document(9, "POD-DOC-009", "docs/specifications/POD_PLANO_MESTRE_CONSTRUCAO_V002.md", "2.1.0", "ACTIVE", "A3", "MASTER_BUILD_PLAN"),
+    Document(10, "POD-DOC-010", "docs/specifications/POD_PLANO_TESTES_ACEITE_V002.md", "2.1.0", "ACTIVE", "A3", "MASTER_TEST_PLAN"),
+    Document(11, "POD-DOC-011", "docs/governance/POD_GOVERNANCA_DOCUMENTAL_V003.md", "3.1.0", "ACTIVE", "A2", "GOVERNANCE_SPECIFICATION"),
+    Document(12, "POD-DOC-012", "docs/adr/README.md", "1.1.0", "ACTIVE", "A2", "ADR_INDEX"),
     Document(13, "POD-ADR-003", "docs/adr/ADR-003-AUTORIDADE-DE-PROVA-E-TRANSICAO-DE-MISSAO.md", "1.0.0", "ACCEPTED", "A2", "ARCHITECTURE_DECISION"),
     Document(14, "POD-ADR-004", "docs/adr/ADR-004-PERSISTENCIA-ATOMICA-JOURNAL-E-OUTBOX.md", "1.0.0", "ACCEPTED", "A2", "ARCHITECTURE_DECISION"),
     Document(15, "POD-ADR-005", "docs/adr/ADR-005-PORTOES-HUMANOS-E-DEPENDENCIAS-EXTERNAS.md", "1.0.0", "ACCEPTED", "A1", "ARCHITECTURE_DECISION"),
     Document(16, "POD-ADR-006", "docs/adr/ADR-006-LEASE-FENCING-TEMPO-E-DELEGACAO-OFFLINE.md", "1.0.0", "ACCEPTED", "A2", "ARCHITECTURE_DECISION"),
     Document(17, "POD-ADR-007", "docs/adr/ADR-007-NUCLEO-DE-SEGURANCA-DESDE-A-FUNDACAO.md", "1.0.0", "ACCEPTED", "A1", "ARCHITECTURE_DECISION"),
     Document(18, "POD-ADR-008", "docs/adr/ADR-008-MULTIPROJETO-FEDERACAO-E-SUPERSESSAO-DA-TOPOLOGIA-ANTERIOR.md", "1.0.0", "ACCEPTED", "A2", "ARCHITECTURE_DECISION"),
+    Document(19, "POD-ADR-009", "docs/adr/ADR-009-INDEPENDENCIA-DO-CHATGPT-IA-HIBRIDA-E-TERMINAL-SOBERANO.md", "1.0.0", "ACCEPTED", "A1", "ARCHITECTURE_DECISION"),
 )
 
 
@@ -74,6 +75,7 @@ ACTIVE_CONTRACT_PATHS = (
     "docs/specifications/POD_CONTRATOS_DADOS_ESTADOS_V002.md",
     "docs/specifications/POD_SEGURANCA_AUTORIZACOES_V002.md",
     "docs/specifications/POD_PLANO_MESTRE_CONSTRUCAO_V002.md",
+    "docs/adr/ADR-009-INDEPENDENCIA-DO-CHATGPT-IA-HIBRIDA-E-TERMINAL-SOBERANO.md",
 )
 
 FORBIDDEN_ACTIVE_PATTERNS = {
@@ -282,6 +284,24 @@ def validate_active_invariants(errors: list[str]) -> None:
     for token in required_tokens:
         if token not in contracts:
             errors.append(f"contrato canônico não contém token obrigatório: {token}")
+
+    sovereignty = (
+        ROOT / "docs/adr/ADR-009-INDEPENDENCIA-DO-CHATGPT-IA-HIBRIDA-E-TERMINAL-SOBERANO.md"
+    ).read_text(encoding="utf-8")
+    required_sovereignty_tokens = (
+        "POD_IS_STANDALONE_PRODUCT = TRUE",
+        "CHATGPT_IS_NOT_RUNTIME_DEPENDENCY = TRUE",
+        "MCP_IS_OPTIONAL_ADAPTER = TRUE",
+        "POLICY_IS_ENFORCED_BY_CODE = TRUE",
+        "PROMPT_IS_NOT_POLICY = TRUE",
+        "TERMINAL_IS_NATIVE_POD_INTERFACE = TRUE",
+        "TERMINAL_PROCESS_IS_NOT_POD_RUNTIME = TRUE",
+        "MISSION_CONTINUES_WITH_INTERFACES_CLOSED = TRUE",
+        "CORE_OPERATES_WITHOUT_EXTERNAL_AI = TRUE",
+    )
+    for token in required_sovereignty_tokens:
+        if token not in sovereignty:
+            errors.append(f"ADR-009 não contém invariante obrigatório: {token}")
 
 
 def validate_traceability(errors: list[str]) -> None:

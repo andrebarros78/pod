@@ -120,6 +120,21 @@ class DocsValidatorIntegrationTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("bloco Markdown ~~~ não fechado", result.stdout)
 
+    def test_missing_sovereignty_invariant_is_rejected(self) -> None:
+        temporary, target = self.with_copy()
+        self.addCleanup(temporary.cleanup)
+        path = target / "docs/adr/ADR-009-INDEPENDENCIA-DO-CHATGPT-IA-HIBRIDA-E-TERMINAL-SOBERANO.md"
+        text = path.read_text(encoding="utf-8").replace(
+            "CHATGPT_IS_NOT_RUNTIME_DEPENDENCY = TRUE",
+            "CHATGPT_DEPENDENCY_UNSPECIFIED = TRUE",
+        )
+        path.write_text(text, encoding="utf-8")
+
+        result = self.run_validator(target)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("ADR-009 não contém invariante obrigatório", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

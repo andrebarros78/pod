@@ -1,9 +1,9 @@
 # POD — MATRIZ MESTRA DE RASTREABILIDADE E CONFORMIDADE — V002
 
 **Identificador:** POD-DOC-008
-**Versão:** 2.0.0
+**Versão:** 2.1.0
 **Status:** ACTIVE
-**Data:** 2026-09-02
+**Data:** 2026-09-03
 **Conjunto:** POD-DOCSET-V003
 **Autoridade:** A3 — requisitos e conformidade
 **Substitui:** matriz V001 de 72 requisitos
@@ -191,7 +191,27 @@ Aceite exige:
 | REQ-AI-007 | Strategy fingerprint impede repetição improdutiva | POD-DOC-006 | F6 | T-AI-008 | HIGH | DEFINED_NOT_IMPLEMENTED |
 | REQ-AI-008 | Budget Ledger separa estimativa, consumo observado e autorização | POD-DOC-006 | F6–F7 | T-AI-009 | HIGH | DEFINED_NOT_IMPLEMENTED |
 
-## 14. Interface e verdade operacional
+## 14. Independência, IA híbrida e Terminal Soberano
+
+| ID | Requisito e critério de aceite | Fonte | Fase | Teste | Criticidade | Estado |
+|---|---|---|---|---|---|---|
+| REQ-SOV-001 | POD inicia, opera e recupera sem ChatGPT | ADR-009 | F0–F3 | T-SOV-001,T-SOV-005 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-002 | Núcleo inicia e recupera sem MCP externo | ADR-009 | F0–F3 | T-SOV-002,T-SOV-005 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-003 | Regras soberanas são aplicadas por código versionado | ADR-009 | F0–F2 | T-SOV-009,T-SOV-010,T-SOV-018 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-004 | Saída de IA não altera autoridade diretamente | ADR-009 | F6–F7 | T-SOV-009,T-AI-007 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-005 | APIs de IA são acessadas somente por Provider Adapters | ADR-009 | F6–F7 | T-SOV-006,T-SOV-008 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-006 | Nenhum provedor é dependência fixa do domínio | ADR-009 | F6–F7 | T-SOV-008 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-007 | Failover preserva policy, privacidade e orçamento | ADR-009 | F7 | T-SOV-006 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-008 | Modo sem IA externa preserva núcleo e estado | ADR-009 | F3,F6 | T-SOV-007,T-SOV-014 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-009 | Executável `pod` oferece terminal próprio | ADR-009 | F3 | T-SOV-001,T-SOV-011,T-SOV-013 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-010 | Encerrar terminal ou painel não encerra missão | ADR-009 | F3 | T-SOV-003,T-SOV-004 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-011 | Terminal possui saída humana e JSON estável | ADR-009 | F3 | T-SOV-011 | HIGH | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-012 | Comandos e efeitos do terminal são autenticados e auditados | ADR-009 | F2–F3 | T-SOV-012,T-SOV-017 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-013 | Estado e contexto soberanos pertencem ao POD | ADR-009 | F1,F6 | T-SOV-005,T-SOV-016 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-014 | Prova não depende de texto ou sessão externa | ADR-009 | F3 | T-SOV-013 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-SOV-015 | API própria separa POD de APIs dos fornecedores | ADR-009 | F1,F3,F7 | T-SOV-008,T-SOV-015 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+
+## 15. Interface e verdade operacional
 
 | ID | Requisito e critério de aceite | Fonte | Fase | Teste | Criticidade | Estado |
 |---|---|---|---|---|---|---|
@@ -202,7 +222,7 @@ Aceite exige:
 | REQ-UI-005 | Interface mostra bloqueio, ramo e condição de retomada | POD-DOC-004 | F3 | T-UI-005 | HIGH | DEFINED_NOT_IMPLEMENTED |
 | REQ-UI-006 | READY representa saúde funcional | POD-DOC-005 | F3 | T-UI-006 | HIGH | DEFINED_NOT_IMPLEMENTED |
 
-## 15. Operação e recuperação
+## 16. Operação e recuperação
 
 | ID | Requisito e critério de aceite | Fonte | Fase | Teste | Criticidade | Estado |
 |---|---|---|---|---|---|---|
@@ -214,7 +234,7 @@ Aceite exige:
 | REQ-OPS-006 | Configuração inválida ou store indisponível impede READY falso | POD-DOC-005 | F0,F13 | T-OPS-006,T-OPS-007 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
 | REQ-OPS-007 | Queda de canal não interrompe execução local já aceita | POD-DOC-003 | F3 | T-OPS-008 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
 
-## 16. Produto e entrega
+## 17. Produto e entrega
 
 | ID | Requisito e critério de aceite | Fonte | Fase | Teste | Criticidade | Estado |
 |---|---|---|---|---|---|---|
@@ -227,11 +247,11 @@ Aceite exige:
 | REQ-DEL-007 | Evidence Pack final liga todos os gates | POD-DOC-006 | F12,F15 | T-PROD-008 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
 | REQ-DEL-008 | E2E soberano constrói, falha, recupera, entrega e prova | POD-DOC-009 | F15 | T-PROD-002,T-PROD-008,T-OPS-002 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
 
-## 17. Resumo inicial
+## 18. Resumo inicial
 
 | Estado | Quantidade esperada antes da validação |
 |---|---:|
 | ACCEPTED | 6 |
-| DEFINED_NOT_IMPLEMENTED | 104 |
+| DEFINED_NOT_IMPLEMENTED | 119 |
 
 As quantidades são verificadas automaticamente. Após T-DOC aprovado e evidenciado, somente REQ-DOC pode avançar para ACCEPTED. Os demais permanecem não implementados até prova do runtime.

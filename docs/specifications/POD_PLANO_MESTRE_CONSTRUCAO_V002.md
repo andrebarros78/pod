@@ -1,9 +1,9 @@
 # POD — PLANO MESTRE DE CONSTRUÇÃO — V002
 
 **Identificador:** POD-DOC-009
-**Versão:** 2.0.0
+**Versão:** 2.1.0
 **Status:** ACTIVE
-**Data:** 2026-09-02
+**Data:** 2026-09-03
 **Conjunto:** POD-DOCSET-V003
 **Autoridade:** A3 — sequência executiva
 **Substitui:** plano mestre V001
@@ -182,7 +182,9 @@ Receber um projeto mínimo, produzir um artefato determinístico, validar um cri
 
 ### Entregar
 
-- Command API/CLI mínima;
+- Command API própria;
+- executável nativo `pod` e Terminal Soberano mínimo;
+- serviço persistente separado do processo do terminal;
 - Query API;
 - Read Model;
 - painel funcional simples;
@@ -194,6 +196,8 @@ Receber um projeto mínimo, produzir um artefato determinístico, validar um cri
 ### Falhas obrigatórias
 
 - fechar painel;
+- fechar terminal durante missão;
+- iniciar sem ChatGPT e sem MCP externo;
 - repetir comando;
 - encerrar processo antes da publicação da outbox;
 - reiniciar processo;
@@ -201,7 +205,9 @@ Receber um projeto mínimo, produzir um artefato determinístico, validar um cri
 
 ### Gate de saída
 
-Uma missão real e reproduzível atinge MISSION_PROVEN após restart sem duplicação ou bypass.
+Uma missão real e reproduzível, criada e comprovada pelo executável `pod`, atinge
+MISSION_PROVEN após fechamento do terminal e restart do runtime, sem ChatGPT, sem
+MCP externo, sem duplicação e sem bypass.
 
 ## 9. F4 — Engine local e Construction Engineering
 
@@ -272,6 +278,7 @@ Concorrência aumenta capacidade sem duplicar efeito nem perder estado.
 - strategy fingerprint;
 - planner/replanner;
 - uma porta de provider ou motor local substituível.
+- modo determinístico/local que preserve o núcleo quando APIs externas faltarem.
 
 ### Testar
 
@@ -294,6 +301,7 @@ Brain planeja e replaneja sem adquirir autoridade operacional.
 - Policy Router;
 - Provider Router;
 - adapters;
+- no mínimo dois adapters de fornecedores independentes para provar portabilidade;
 - health funcional;
 - custo e privacidade;
 - context portability;

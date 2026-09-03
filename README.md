@@ -6,6 +6,7 @@ O POD é um construtor soberano de software. Recebe uma missão, preserva o comp
 
 - Projeto conceitual e arquitetura lógica: normativos.
 - Contratos de autoridade, dados, estados, segurança e prova: normativos.
+- Independência do ChatGPT, IA híbrida e Terminal Soberano: decisão normativa.
 - Matriz de requisitos e plano de construção: normativos.
 - Implementação executável: ainda não iniciada.
 - Stack física: ainda não escolhida.
@@ -36,6 +37,13 @@ MISSION_GIVEN
 ~~~
 
 O Proof Engine avalia evidências. O Mission Core é o único componente que altera o estado soberano da missão. Cérebro, Worker, modelo de IA, painel ou texto não podem declarar conclusão.
+
+O executável próprio `pod` será a interface operacional nativa. ChatGPT, MCP e
+provedores de IA serão integrações substituíveis; o núcleo não dependerá deles para
+preservar estado, aplicar regras ou recuperar missões.
+
+A decisão completa está em [ADR-009 — Independência do ChatGPT, IA híbrida e
+Terminal Soberano](docs/adr/ADR-009-INDEPENDENCIA-DO-CHATGPT-IA-HIBRIDA-E-TERMINAL-SOBERANO.md).
 
 ## Validar a documentação
 
