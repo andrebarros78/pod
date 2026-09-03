@@ -1,9 +1,9 @@
 # POD — PLANO MESTRE DE TESTES E ACEITE — V002
 
 **Identificador:** POD-DOC-010
-**Versão:** 2.0.0
+**Versão:** 2.1.0
 **Status:** ACTIVE
-**Data:** 2026-09-02
+**Data:** 2026-09-03
 **Conjunto:** POD-DOCSET-V003
 **Autoridade:** A3 — prova e aceite
 **Substitui:** Plano Mestre de Testes V001
@@ -210,7 +210,30 @@ Teste destrutivo nunca usa produção.
 | T-AI-008 | strategy fingerprint repetido | limite de repetição acionado |
 | T-AI-009 | Budget Ledger | estimativa, consumo e autorização permanecem distinguíveis |
 
-## 14. Interface e verdade operacional
+## 14. Independência, IA híbrida e Terminal Soberano
+
+| ID | Cenário | Resultado obrigatório |
+|---|---|---|
+| T-SOV-001 | iniciar sem credencial ou produto ChatGPT | núcleo READY e terminal operacional |
+| T-SOV-002 | iniciar sem servidor MCP externo | núcleo READY; somente adapter afetado fica DEGRADED |
+| T-SOV-003 | fechar terminal durante missão | missão continua no serviço persistente |
+| T-SOV-004 | fechar painel durante missão | missão continua no serviço persistente |
+| T-SOV-005 | reiniciar runtime com missão ativa | missão recuperada e reconciliada |
+| T-SOV-006 | derrubar provedor principal | failover preserva policy, privacidade e orçamento |
+| T-SOV-007 | derrubar todos os provedores externos | núcleo saudável; somente ramo dependente aguarda |
+| T-SOV-008 | trocar GPT por provedor independente | domínio, estado e critérios permanecem |
+| T-SOV-009 | modelo solicitar ação proibida | DENY auditado; nenhum efeito executado |
+| T-SOV-010 | prompt contradizer Constitution | Constitution prevalece |
+| T-SOV-011 | executar comandos em modo humano e `--json` | schema, conteúdo e exit codes válidos |
+| T-SOV-012 | perder conexão do terminal e reconectar | acompanhamento retomado sem efeito duplicado |
+| T-SOV-013 | consultar prova sem ChatGPT | Evidence Pack reproduzível pelo terminal |
+| T-SOV-014 | usar modelo local autorizado | missão compatível independe de API externa |
+| T-SOV-015 | atualizar terminal separadamente | runtime e missões permanecem íntegros |
+| T-SOV-016 | injetar thread externa como ID soberano | entrada recusada ou mapeada sem substituir ID POD |
+| T-SOV-017 | provocar segredo em saída ou log | conteúdo sanitizado e incidente registrado |
+| T-SOV-018 | tentar elevar regra via memória aprendida | promoção bloqueada e auditada |
+
+## 15. Interface e verdade operacional
 
 | ID | Cenário | Resultado obrigatório |
 |---|---|---|
@@ -221,7 +244,7 @@ Teste destrutivo nunca usa produção.
 | T-UI-005 | bloqueio | motivo, ramo e condição de retomada visíveis |
 | T-UI-006 | health | READY depende de função, não apenas processo |
 
-## 15. Recovery, update e operação
+## 16. Recovery, update e operação
 
 | ID | Cenário | Resultado obrigatório |
 |---|---|---|
@@ -234,7 +257,7 @@ Teste destrutivo nunca usa produção.
 | T-OPS-007 | store indisponível | falha fechada sem confirmação falsa |
 | T-OPS-008 | canal externo cai | execução local aceita continua |
 
-## 16. Produto e entrega
+## 17. Produto e entrega
 
 | ID | Cenário | Resultado obrigatório |
 |---|---|---|
@@ -247,7 +270,7 @@ Teste destrutivo nunca usa produção.
 | T-PROD-007 | NOT_APPLICABLE | justificativa auditável |
 | T-PROD-008 | Evidence Pack final | todos os gates referenciados |
 
-## 17. E2E por marco
+## 18. E2E por marco
 
 ### E2E-F3
 
@@ -265,7 +288,7 @@ Missão ativa atravessa update e restore.
 
 Produto controlado é planejado, construído, testado, protegido, recuperado, entregue e provado.
 
-## 18. Testes prolongados
+## 19. Testes prolongados
 
 Duração é definida por risco e objetivo. Resultado de teste curto não sustenta alegação de operação prolongada.
 
@@ -281,7 +304,7 @@ Coletar:
 - vazamento de processo;
 - integridade de estado.
 
-## 19. Gate de release
+## 20. Gate de release
 
 Release candidata é rejeitada quando:
 
@@ -296,11 +319,12 @@ Release candidata é rejeitada quando:
 - manifesto é inválido;
 - MISSION_PROVEN depende de texto ou ação do construtor.
 
-## 20. Estado inicial
+## 21. Estado inicial
 
 | Grupo | Estado em 2026-09-02 |
 |---|---|
 | T-DOC | EXECUTÁVEL |
+| T-SOV | PLANNED / NOT_IMPLEMENTED |
 | Demais testes | PLANNED / NOT_IMPLEMENTED |
 
 Nenhum teste planejado é declarado executado por este documento.

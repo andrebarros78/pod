@@ -2,12 +2,12 @@
   "schema_version": "2.0",
   "document_set_id": "POD-DOCSET-V003",
   "status": "ACTIVE",
-  "generated_at": "2026-09-02T18:19:27-03:00",
+  "generated_at": "2026-09-03T06:35:55-03:00",
   "supersedes": [
     "POD-DOCSET-V002",
     "POD-2026-09-02"
   ],
-  "canonical_document_count": 18,
+  "canonical_document_count": 19,
   "set_hash_algorithm": {
     "name": "SHA-256",
     "encoding": "UTF-8",
@@ -15,7 +15,7 @@
     "ordering": "order ascending",
     "manifest_included": false
   },
-  "set_hash": "sha256:1290bc91c5917bb9d0c17af4f210767d430d37956b9ee529225ab1327989a83c",
+  "set_hash": "sha256:8440cc6e0591d418e541c5606932d7a468954ee1514a9ae8d3cb8fae7bbe908f",
   "implementation_status_claimed": false,
   "documents": [
     {
@@ -24,10 +24,10 @@
       "path": "docs/POD_INDICE_MESTRE_V003.md",
       "document_type": "MASTER_DOCUMENT_INDEX",
       "authority_level": "A1",
-      "version": "3.0.0",
+      "version": "3.1.0",
       "status": "ACTIVE",
-      "size_bytes": 8626,
-      "sha256": "sha256:31c032bc3a9f9e72045caa5e32287161ea9e55a43e8b8e8b5b857b3db7b2ff9e"
+      "size_bytes": 8865,
+      "sha256": "sha256:aaf96b15111ef720b3cdb2ade56b5ff281ec94bd5ff242e82cacddb7331e9801"
     },
     {
       "order": 2,
@@ -101,10 +101,10 @@
       "path": "docs/specifications/POD_REQUISITOS_RASTREABILIDADE_V002.md",
       "document_type": "TRACEABILITY_MATRIX",
       "authority_level": "A3",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "status": "ACTIVE",
-      "size_bytes": 19424,
-      "sha256": "sha256:6c51e49b488cc4462088e7c4463465a99ee428f449e70d38e32cce0bc0e9cfbe"
+      "size_bytes": 21729,
+      "sha256": "sha256:3c2ecf165daf5117cbbcb0a2379c5ac264dbc73b9395f98005aaacfd1d9436af"
     },
     {
       "order": 9,
@@ -112,10 +112,10 @@
       "path": "docs/specifications/POD_PLANO_MESTRE_CONSTRUCAO_V002.md",
       "document_type": "MASTER_BUILD_PLAN",
       "authority_level": "A3",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "status": "ACTIVE",
-      "size_bytes": 11191,
-      "sha256": "sha256:b9ad2aa55b3fe5f09e88815db03ede4fa5789826cf679750f4e2ccc2edae56b0"
+      "size_bytes": 11659,
+      "sha256": "sha256:f76f88839c5a9f4c5f0e5a39f495c1ec1fff6cf9d0541c9161d5b0e98e8f694b"
     },
     {
       "order": 10,
@@ -123,10 +123,10 @@
       "path": "docs/specifications/POD_PLANO_TESTES_ACEITE_V002.md",
       "document_type": "MASTER_TEST_PLAN",
       "authority_level": "A3",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "status": "ACTIVE",
-      "size_bytes": 12688,
-      "sha256": "sha256:7145bddf05afa00662061b929342fca3b18f437cb26a7ae05878baecc49b618b"
+      "size_bytes": 14546,
+      "sha256": "sha256:6fd05a7b5275d5b7af46a74d7ead8fca35f982cf4181b76bc5cc20041b5d9f79"
     },
     {
       "order": 11,
@@ -134,10 +134,10 @@
       "path": "docs/governance/POD_GOVERNANCA_DOCUMENTAL_V003.md",
       "document_type": "GOVERNANCE_SPECIFICATION",
       "authority_level": "A2",
-      "version": "3.0.0",
+      "version": "3.1.0",
       "status": "ACTIVE",
       "size_bytes": 6920,
-      "sha256": "sha256:ec3bd9667aa758c24e58a9011fb43bfc35c925e623bdf67455c0ffb6e1f9efbc"
+      "sha256": "sha256:23102126894169333944ed326727a1b4ae63dc2f1ae43e59d4500066b3ca8063"
     },
     {
       "order": 12,
@@ -145,10 +145,10 @@
       "path": "docs/adr/README.md",
       "document_type": "ADR_INDEX",
       "authority_level": "A2",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "status": "ACTIVE",
-      "size_bytes": 1625,
-      "sha256": "sha256:2b7381c855055f640f58a40c9a54726cbc437526c0079058e7bf32f08943694e"
+      "size_bytes": 1781,
+      "sha256": "sha256:9cfe77a105d4e4993cd2a4f1ad35f166329bc893e3883776727a4a94237543ee"
     },
     {
       "order": 13,
@@ -215,6 +215,17 @@
       "status": "ACCEPTED",
       "size_bytes": 3729,
       "sha256": "sha256:9647367e85bc1e6412f5f4c385afebf9f8f37c6392a8d9de5aab827e4a1451fa"
+    },
+    {
+      "order": 19,
+      "document_id": "POD-ADR-009",
+      "path": "docs/adr/ADR-009-INDEPENDENCIA-DO-CHATGPT-IA-HIBRIDA-E-TERMINAL-SOBERANO.md",
+      "document_type": "ARCHITECTURE_DECISION",
+      "authority_level": "A1",
+      "version": "1.0.0",
+      "status": "ACCEPTED",
+      "size_bytes": 23451,
+      "sha256": "sha256:f656bff176a297824e6a43d9ddb0c4754a4dce24b32e01b962e90894ee357ec1"
     }
   ]
 }

@@ -1,9 +1,9 @@
 # POD — GOVERNANÇA DOCUMENTAL, VERSIONAMENTO E ADR — V003
 
 **Identificador:** POD-DOC-011
-**Versão:** 3.0.0
+**Versão:** 3.1.0
 **Status:** ACTIVE
-**Data:** 2026-09-02
+**Data:** 2026-09-03
 **Conjunto:** POD-DOCSET-V003
 **Autoridade:** A2 — governança
 **Substitui:** Governança V001 e regras documentais do DOCSET V002
@@ -186,7 +186,7 @@ Assinatura é recomendada e se torna obrigatória para release quando a infraest
 Docset ativo recebe tag:
 
 ~~~text
-pod-docset-v3.0.0
+pod-docset-v3.1.0
 ~~~
 
 Tag aponta para o commit integrado e não é movida. Correção posterior cria nova versão.
