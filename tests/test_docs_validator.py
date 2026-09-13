@@ -16,7 +16,7 @@ class DocsValidatorIntegrationTests(unittest.TestCase):
 
     def run_validator(self, root: Path) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
-            [sys.executable, "scripts/validate_docs.py"],
+            [sys.executable, "scripts/validate_docs_v003_compat.py"],
             cwd=root,
             text=True,
             capture_output=True,
