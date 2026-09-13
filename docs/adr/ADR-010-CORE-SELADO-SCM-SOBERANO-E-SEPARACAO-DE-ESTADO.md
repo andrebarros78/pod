@@ -8,7 +8,7 @@
 **Autoridade:** A1/A2
 **Decisão:** separar estruturalmente Core, execução, cognição, dados e integrações; impedir acúmulo operacional no Core; instituir SCM soberano com admissão governada.
 
-## 1. Contexto
+## Contexto
 
 O DOCSET V003 já estabelece POD multiprojeto, soberania do Mission Core, execução governada, memória persistente, evidência por hash, IA multi-provider e independência estrutural do ChatGPT.
 
@@ -22,7 +22,11 @@ A reconciliação V004 fecha lacunas ainda abertas:
 - a atualização do Core não exigia imutabilidade de release e promoção atômica;
 - missão não possuía um Execution Envelope único reunindo escopo, capacidades, recursos, retenção, rollback, evidência e política de conhecimento.
 
-## 2. Decisão
+## Problema
+
+Sem estas fronteiras, o POD poderia preservar corretamente a lógica de missão e ainda assim acumular massa operacional no Core, misturar conhecimento com projeções derivadas, aceitar conhecimento sem ciclo de governança completo e acoplar integrações externas a componentes internos.
+
+## Decisão
 
 O POD adota as seguintes fronteiras lógicas:
 
@@ -299,7 +303,7 @@ KNOWLEDGE_GROWTH = ALLOWED + MEASURED + JUSTIFIED + COMPACTABLE
 
 Repetições equivalentes reforçam objeto existente quando semanticamente correto, em vez de criar cópia integral.
 
-## 5. Consequências
+## Consequências
 
 ### Positivas
 
@@ -318,7 +322,7 @@ Repetições equivalentes reforçam objeto existente quando semanticamente corre
 - armazenamento por conteúdo exige gestão de referências e garbage collection seguro;
 - promoção de release exige pipeline de saúde e rollback.
 
-## 6. Compatibilidade
+## Compatibilidade
 
 Esta decisão preserva:
 
@@ -330,6 +334,71 @@ Esta decisão preserva:
 - federação e delegação governadas.
 
 Onde o DOCSET V003 utilizar `Memory` como termo amplo, V004 deve distinguir Operational State, Evidence, Checkpoint e SCM conforme esta decisão.
+
+## Alternativas consideradas
+
+1. Manter o Memory Plane V003 como abstração única — rejeitado por misturar classes de estado.
+2. Usar somente RAG/banco vetorial como memória — rejeitado porque projeção não pode ser fonte canônica.
+3. Permitir escrita operacional dentro do Core com limpeza posterior — rejeitado porque higiene deve ser estrutural, não corretiva.
+4. Acoplar fornecedores externos diretamente ao Brain — rejeitado por violar soberania e substituibilidade.
+
+## Migração
+
+A migração documental ocorre por DOCSET V004 sem apagar V003. Na implementação futura:
+
+1. criar fronteiras físicas externas ao Core;
+2. classificar estado existente;
+3. introduzir Execution Envelope;
+4. introduzir SCM e ledger;
+5. migrar projeções para estado reconstruível;
+6. introduzir CAS para evidência/artefato elegível;
+7. habilitar health gate, promoção atômica e rollback.
+
+Nenhuma migração física é afirmada por este ADR.
+
+## Rollback
+
+Enquanto não houver implementação, rollback documental retorna o conjunto ativo ao DOCSET V003. Na implementação, rollback de Core ocorre por troca atômica para última release verificada, sem mover estado durável para dentro da release.
+
+## Segurança
+
+- segredo permanece externo ao Core;
+- Knowledge Admission executa filtro de segredo e conteúdo sensível;
+- deduplicação física não funde autorização, ownership ou retenção;
+- GC é fail-closed quando referência ou retenção for incerta;
+- Integration Plane respeita Policy/Capability antes de qualquer efeito externo.
+
+## Evidência
+
+A implementação somente pode afirmar esta arquitetura como PROVEN quando houver evidência de:
+
+- Core imutável por release;
+- configuração, segredo e estado fora da release;
+- projetos e missões fisicamente fora do Core;
+- classificação DURABLE/RECONSTRUCTIBLE/EPHEMERAL aplicada;
+- Admission Gate testado;
+- conhecimento sem proveniência rejeitado;
+- conhecimento sem escopo rejeitado;
+- contradição não sobrescrita silenciosamente;
+- revogação removendo conhecimento do retrieval ativo;
+- projeções destruídas e reconstruídas sem perda canônica;
+- Evidence Store verificando hash;
+- deduplicação física por conteúdo;
+- métricas de crescimento do SCM;
+- rollback de release;
+- `CORE_CONTAMINATION=0` e `UNEXPECTED_RESIDUE=0` após missão de teste.
+
+## Condição de revisão
+
+Revisar este ADR se testes demonstrarem que uma fronteira impede segurança, recuperação, isolamento multiprojeto ou convergência de missão, ou se nova restrição física exigir mudança de autoridade.
+
+## Documentos relacionados
+
+- POD-DOC-001 — Índice Mestre V004;
+- POD-DOC-005 — Arquitetura Técnica V003;
+- POD-DOC-006 — Contratos, Dados e Estados V002;
+- POD-DOC-013 — Core, SCM, Armazenamento e Execution Envelope V001;
+- ADR-003, ADR-004, ADR-007, ADR-008 e ADR-009.
 
 ## 7. Critérios de aceite
 
