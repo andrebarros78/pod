@@ -64,7 +64,7 @@ Em conflito, prevalece a primeira fonte aplicável:
 | 9 | POD-DOC-009 | [Plano Mestre de Construção V002](specifications/POD_PLANO_MESTRE_CONSTRUCAO_V002.md) | A3 | sequência executiva existente |
 | 10 | POD-DOC-010 | [Plano de Testes e Aceite V002](specifications/POD_PLANO_TESTES_ACEITE_V002.md) | A3 | prova e gates existentes |
 | 11 | POD-DOC-011 | [Governança Documental V003](governance/POD_GOVERNANCA_DOCUMENTAL_V003.md) | A2 | versão e integridade |
-| 12 | POD-DOC-012 | [Índice de ADRs](adr/README.md) | A2 | decisões arquiteturais ativas |
+| 12 | POD-DOC-012 | [Índice de ADRs V004](adr/README_V004.md) | A2 | decisões arquiteturais ativas |
 | 13 | POD-ADR-003 | [ADR-003](adr/ADR-003-AUTORIDADE-DE-PROVA-E-TRANSICAO-DE-MISSAO.md) | A2 | prova e transição |
 | 14 | POD-ADR-004 | [ADR-004](adr/ADR-004-PERSISTENCIA-ATOMICA-JOURNAL-E-OUTBOX.md) | A2 | persistência atômica |
 | 15 | POD-ADR-005 | [ADR-005](adr/ADR-005-PORTOES-HUMANOS-E-DEPENDENCIAS-EXTERNAS.md) | A1 | portões humanos |
