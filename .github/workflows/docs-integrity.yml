@@ -6,6 +6,7 @@ on:
       - "README.md"
       - "docs/**"
       - "scripts/validate_docs.py"
+      - "scripts/validate_docs_v003_compat.py"
       - "scripts/validate_docs_v004.py"
       - ".github/workflows/docs-integrity.yml"
   push:
@@ -15,6 +16,7 @@ on:
       - "README.md"
       - "docs/**"
       - "scripts/validate_docs.py"
+      - "scripts/validate_docs_v003_compat.py"
       - "scripts/validate_docs_v004.py"
       - ".github/workflows/docs-integrity.yml"
 
@@ -35,7 +37,7 @@ jobs:
           python-version: "3.12"
 
       - name: Validate historical POD DOCSET V003
-        run: python scripts/validate_docs.py
+        run: python scripts/validate_docs_v003_compat.py
 
       - name: Validate reconciled POD DOCSET V004
         run: python scripts/validate_docs_v004.py
