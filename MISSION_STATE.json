@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "project": "POD",
+  "repository": "https://github.com/andrebarros78/pod",
+  "branch": "build/pod-foundation-v001",
+  "phase": 0,
+  "phase_name": "Baseline",
+  "phase_target": "BASELINE_RECONCILED",
+  "status": "RUNNING",
+  "active_module": "governance-baseline",
+  "module_status": {
+    "canonical_spec": "VERIFIED",
+    "github_remote": "VERIFIED",
+    "historical_docset_preservation": "VERIFIED",
+    "github_native_adr": "VERIFIED",
+    "specialist_arms_adr": "VERIFIED",
+    "governance_validation": "NOT_VERIFIED"
+  },
+  "verified_facts": [
+    "GitHub remote andrebarros78/pod is reachable",
+    "GitHub account andrebarros78 is authenticated on construction host with repo/workflow scopes",
+    "Construction branch build/pod-foundation-v001 exists on origin",
+    "Canonical specification POD_PROJETO_CONSOLIDADO.md copied from Owner-provided v3.0 artifact",
+    "Previous DOCSET V004 preserved under HISTORY/DOCSET_V004",
+    "Rust toolchain present: cargo 1.75.0 / rustc 1.75.0"
+  ],
+  "open_failures": [],
+  "external_blocks": [],
+  "next_action": "Run new governance validator and regression tests; commit and push F0 baseline if PASS.",
+  "evidence": []
+}

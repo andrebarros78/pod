@@ -1,48 +1,18 @@
-name: docs-integrity
+name: POD Governance Integrity
 
 on:
-  pull_request:
-    paths:
-      - "README.md"
-      - "docs/**"
-      - "scripts/validate_docs.py"
-      - "scripts/validate_docs_v003_compat.py"
-      - "scripts/validate_docs_v004.py"
-      - "tests/**"
-      - ".github/workflows/docs-integrity.yml"
   push:
-    branches:
-      - main
-    paths:
-      - "README.md"
-      - "docs/**"
-      - "scripts/validate_docs.py"
-      - "scripts/validate_docs_v003_compat.py"
-      - "scripts/validate_docs_v004.py"
-      - "tests/**"
-      - ".github/workflows/docs-integrity.yml"
-
-permissions:
-  contents: read
+  pull_request:
 
 jobs:
-  validate:
+  governance:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-
-      - name: Validate historical POD DOCSET V003
-        run: python scripts/validate_docs_v003_compat.py
-
-      - name: Validate reconciled POD DOCSET V004
-        run: python scripts/validate_docs_v004.py
-
-      - name: Test validator failure detection
-        run: python -m unittest discover -s tests -v
+          python-version: '3.12'
+      - name: Validate canonical governance
+        run: python3 scripts/validate_governance.py
+      - name: Run governance regression tests
+        run: python3 -m unittest discover -s tests -v

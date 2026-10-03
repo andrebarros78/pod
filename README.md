@@ -1,64 +1,36 @@
 # POD — Plataforma Orquestradora Durável
 
-O POD é um construtor soberano de software. Recebe uma missão, preserva o compromisso assumido, planeja, executa, testa, recupera falhas e somente conclui quando o resultado estiver comprovado.
+O POD é um construtor soberano de software. Recebe um objetivo humano e assume a responsabilidade de entregá-lo construído, testado, recuperável e comprovado.
 
-## Estado atual
+## Fonte normativa
 
-- Projeto conceitual e arquitetura lógica: normativos.
-- Contratos de autoridade, dados, estados, segurança e prova: normativos.
-- Independência do ChatGPT, IA híbrida e Terminal Soberano: decisão normativa.
-- Matriz de requisitos e plano de construção: normativos.
-- Implementação executável: ainda não iniciada.
-- Stack física: ainda não escolhida.
+A fonte normativa única desta linha de construção é:
 
-Documento normativo não é prova de implementação. O estado inicial dos requisitos permanece **DEFINED_NOT_IMPLEMENTED**.
+- [`POD_PROJETO_CONSOLIDADO.md`](POD_PROJETO_CONSOLIDADO.md)
 
-## Entrada oficial
+Decisões arquiteturais posteriores ficam em [`ADR/`](ADR/). O material documental anterior foi preservado em [`HISTORY/`](HISTORY/) com `NORMATIVE=false`.
 
-Leia primeiro o [Índice Mestre V003](docs/POD_INDICE_MESTRE_V003.md). Ele define:
+## GitHub nativo
 
-- o conjunto documental ativo;
-- a precedência entre documentos;
-- os artefatos substituídos;
-- a ordem obrigatória de leitura;
-- a forma de verificar integridade.
+Repositório canônico: `https://github.com/andrebarros78/pod`
 
-O manifesto verificável está em [POD_DOCUMENT_MANIFEST_V003.json](docs/POD_DOCUMENT_MANIFEST_V003.json).
-A execução da validação está registrada em [POD_DOCSET_V003_VALIDATION.md](docs/evidence/POD_DOCSET_V003_VALIDATION.md).
+O GitHub é o SCM nativo do POD para código, branches, pull requests, tags, releases, checks e trilha de integração. A soberania de missão continua pertencendo ao Governador do POD; GitHub não substitui estado operacional de missão.
 
-## Regra de conclusão
+## Estado da construção
 
-~~~text
-MISSION_GIVEN
-→ MISSION_ACCEPTED
-→ WORK
-→ PROOF_VERDICT
-→ MISSION_PROVEN
-~~~
+A construção segue a sequência definida em `POD_PROJETO_CONSOLIDADO.md`:
 
-O Proof Engine avalia evidências. O Mission Core é o único componente que altera o estado soberano da missão. Cérebro, Worker, modelo de IA, painel ou texto não podem declarar conclusão.
+`BASELINE_RECONCILED → CORE_CONTRACTS_DEFINED → MVP_PROVEN → GOVERNOR_PROVEN → BRAIN_PROVEN → CROSS_PLATFORM_PROVEN → CONSTRUCTION_PROVEN → TERMINAL_PROVEN → PRODUCT_PROVEN → SEALED`
 
-O executável próprio `pod` será a interface operacional nativa. ChatGPT, MCP e
-provedores de IA serão integrações substituíveis; o núcleo não dependerá deles para
-preservar estado, aplicar regras ou recuperar missões.
+O estado operacional persistente desta missão está em [`MISSION_STATE.json`](MISSION_STATE.json).
 
-A decisão completa está em [ADR-009 — Independência do ChatGPT, IA híbrida e
-Terminal Soberano](docs/adr/ADR-009-INDEPENDENCIA-DO-CHATGPT-IA-HIBRIDA-E-TERMINAL-SOBERANO.md).
+## Regra de prova
 
-## Validar a documentação
+Código escrito, build verde, processo rodando, endpoint respondendo ou commit criado não equivalem a prova final. Estados de prova só avançam pelos critérios definidos no documento normativo.
 
-No diretório raiz:
+## Validação da governança
 
-~~~bash
-python scripts/validate_docs.py
-~~~
-
-Resultado esperado:
-
-~~~text
-POD_DOCSET_VALID
-~~~
-
-## Regra de implementação
-
-A stack física e o skeleton só podem ser definidos quando todos os gates documentais de F0 estiverem aprovados. Toda implementação deverá ligar requisito, decisão, contrato, teste, evidência e aceite.
+```bash
+python3 scripts/validate_governance.py
+python3 -m unittest discover -s tests -v
+```
