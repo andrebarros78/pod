@@ -1,0 +1,34 @@
+{
+  "baseline_id": "POD-BASELINE-V4-2026-10-03",
+  "status": "BASELINE_RECONCILED",
+  "date": "2026-10-03",
+  "repository": "https://github.com/andrebarros78/pod",
+  "branch": "build/pod-foundation-v001",
+  "canonical_files": [
+    {
+      "path": "POD_DOCUMENTACAO_CONSOLIDADA_CANONICA.md",
+      "version": "4.0.0-DRAFT-CANONICAL",
+      "sha256": "be32422192e253faf23192fc997d4d0eb31d89a2d0b4af214e53229ca5699dab"
+    },
+    {
+      "path": "POD_BASELINE_CANONICA_AQUISICAO_EVOLUCAO_HIGIENE.md",
+      "version": "1.0.0",
+      "sha256": "6b744cb1eceddeb2b96dfe8c77f6d1796095d898015ff01356128d7f039d7baf"
+    }
+  ],
+  "history": {
+    "POD_PROJETO_CONSOLIDADO_v3.0.md": {
+      "normative": false,
+      "sha256": "87de4a78972b4cfc85552521086ce12d29b67f54b69b5a0336e187f57b0de921"
+    }
+  },
+  "phase_state": {
+    "phase_0": "BASELINE_RECONCILED",
+    "phase_1": "CORE_CONTRACTS_DEFINED",
+    "phase_2": "NOT_STARTED"
+  },
+  "notes": [
+    "Documentation reconciliation does not claim runtime implementation.",
+    "Third-party acquisition/sanitization/qualification/integration remain NOT_EXECUTED unless separately evidenced."
+  ]
+}

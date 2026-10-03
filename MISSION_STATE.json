@@ -7,13 +7,16 @@
   "phase_name": "Contratos + modelo formal do núcleo",
   "phase_target": "CORE_CONTRACTS_DEFINED",
   "status": "PROVEN",
-  "active_module": "phase-1-closed",
+  "active_module": "baseline-v4-reconciled-phase-1-closed",
   "module_status": {
-    "canonical_spec": "VERIFIED",
+    "canonical_documentation_v4": "VERIFIED",
+    "acquisition_baseline_v1": "VERIFIED",
+    "historical_v3_preservation": "VERIFIED",
     "github_remote": "VERIFIED",
-    "historical_docset_preservation": "VERIFIED",
     "github_native_adr": "VERIFIED",
     "specialist_arms_adr": "VERIFIED",
+    "reuse_first_adr": "VERIFIED",
+    "ade_runtime_adr": "VERIFIED",
     "governance_validation": "VERIFIED",
     "phase_0_baseline": "VERIFIED",
     "core_contracts_v1": "VERIFIED",
@@ -21,24 +24,23 @@
     "phase_1_contracts": "VERIFIED"
   },
   "verified_facts": [
-    "GitHub remote andrebarros78/pod is reachable",
-    "GitHub account andrebarros78 is authenticated on construction host with repo/workflow scopes",
-    "Construction branch build/pod-foundation-v001 exists on origin",
-    "Canonical specification POD_PROJETO_CONSOLIDADO.md copied from Owner-provided v3.0 artifact",
-    "Previous DOCSET V004 preserved under HISTORY/DOCSET_V004",
-    "Rust toolchain present: cargo 1.75.0 / rustc 1.75.0",
+    "GitHub remote andrebarros78/pod is the canonical SCM",
+    "POD_DOCUMENTACAO_CONSOLIDADA_CANONICA.md imported byte-identical to Owner-provided v4 draft",
+    "POD_BASELINE_CANONICA_AQUISICAO_EVOLUCAO_HIGIENE.md imported byte-identical to Owner-provided v1.0 baseline",
+    "Previous POD_PROJETO_CONSOLIDADO v3 preserved in HISTORY with original SHA-256",
+    "REUSE FIRST and ADE architectural decisions recorded by ADR",
     "Protobuf v1 compiles with protoc",
     "JSON Schemas validate with Draft 2020-12",
     "TLA+ PODCore model checked 2573 states / 495 distinct states with no error",
-    "GitHub Actions run 37119405072 succeeded for Phase 1 integrity"
+    "Phase 1 integrity previously succeeded in GitHub Actions run 37120829030"
   ],
   "open_failures": [],
   "external_blocks": [],
   "next_action": "Aguardar nova orientação do Owner. Não iniciar a Fase 2.",
   "evidence": [
     "EVIDENCE/F0_BASELINE_RECONCILED_2026-10-03.md",
-    "GitHub Actions run 37118761427: success",
     "EVIDENCE/F1_CORE_CONTRACTS_DEFINED_2026-10-03.md",
-    "GitHub Actions run 37119405072: success"
+    "EVIDENCE/BASELINE_V4_RECONCILIATION_2026-10-03.md",
+    "GitHub Actions run 37120829030: success"
   ]
 }
