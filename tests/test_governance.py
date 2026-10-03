@@ -18,7 +18,9 @@ class GovernanceTests(unittest.TestCase):
     def test_mission_state_points_to_github(self):
         state = json.loads((ROOT/'MISSION_STATE.json').read_text(encoding='utf-8'))
         self.assertEqual(state['repository'], 'https://github.com/andrebarros78/pod')
-        self.assertEqual(state['phase'], 0)
+        self.assertGreaterEqual(state['phase'], 0)
+        self.assertLessEqual(state['phase'], 9)
+        self.assertTrue(state['phase_target'])
 
     def test_32_arms_are_fixed_logical_capacity(self):
         text = (ROOT/'ADR'/'ADR-002-BRACOS-LOGICOS-ESPECIALISTAS-32.md').read_text(encoding='utf-8')

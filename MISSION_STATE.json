@@ -3,18 +3,19 @@
   "project": "POD",
   "repository": "https://github.com/andrebarros78/pod",
   "branch": "build/pod-foundation-v001",
-  "phase": 0,
-  "phase_name": "Baseline",
-  "phase_target": "BASELINE_RECONCILED",
+  "phase": 1,
+  "phase_name": "Contratos + modelo TLA+ do núcleo",
+  "phase_target": "CORE_CONTRACTS_DEFINED",
   "status": "RUNNING",
-  "active_module": "governance-baseline",
+  "active_module": "core-contracts-and-formal-model",
   "module_status": {
     "canonical_spec": "VERIFIED",
     "github_remote": "VERIFIED",
     "historical_docset_preservation": "VERIFIED",
     "github_native_adr": "VERIFIED",
     "specialist_arms_adr": "VERIFIED",
-    "governance_validation": "NOT_VERIFIED"
+    "governance_validation": "VERIFIED",
+    "phase_0_baseline": "VERIFIED"
   },
   "verified_facts": [
     "GitHub remote andrebarros78/pod is reachable",
@@ -26,6 +27,9 @@
   ],
   "open_failures": [],
   "external_blocks": [],
-  "next_action": "Run new governance validator and regression tests; commit and push F0 baseline if PASS.",
-  "evidence": []
+  "next_action": "Create versioned Protobuf/JSON Schema contracts and validate the TLA+ core model invariants.",
+  "evidence": [
+    "EVIDENCE/F0_BASELINE_RECONCILED_2026-10-03.md",
+    "GitHub Actions run 37118761427: success"
+  ]
 }

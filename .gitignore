@@ -1,2 +1,12 @@
 __pycache__/
 *.py[cod]
+
+# SentinelX/editor safety backups
+*.bak.*
+
+# Rust/build artifacts
+target/
+
+# Local tool caches
+.tools/
+formal/states/

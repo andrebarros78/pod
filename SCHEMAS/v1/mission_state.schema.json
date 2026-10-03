@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/andrebarros78/pod/SCHEMAS/v1/mission_state.schema.json",
+  "title": "POD Construction Mission State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "repository",
+    "branch",
+    "phase",
+    "phase_name",
+    "phase_target",
+    "status",
+    "active_module",
+    "module_status",
+    "verified_facts",
+    "open_failures",
+    "external_blocks",
+    "next_action",
+    "evidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "project": {
+      "const": "POD"
+    },
+    "repository": {
+      "const": "https://github.com/andrebarros78/pod"
+    },
+    "branch": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9
+    },
+    "phase_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase_target": {
+      "enum": [
+        "BASELINE_RECONCILED",
+        "CORE_CONTRACTS_DEFINED",
+        "MVP_PROVEN",
+        "GOVERNOR_PROVEN",
+        "BRAIN_PROVEN",
+        "CROSS_PLATFORM_PROVEN",
+        "CONSTRUCTION_PROVEN",
+        "TERMINAL_PROVEN",
+        "PRODUCT_PROVEN",
+        "SEALED"
+      ]
+    },
+    "status": {
+      "enum": [
+        "RUNNING",
+        "BLOCKED",
+        "PROVEN",
+        "CANCELLED"
+      ]
+    },
+    "active_module": {
+      "type": "string",
+      "minLength": 1
+    },
+    "module_status": {
+      "type": "object",
+      "additionalProperties": {
+        "enum": [
+          "VERIFIED",
+          "INFERRED",
+          "HYPOTHESIS",
+          "NOT_VERIFIED",
+          "UNKNOWN"
+        ]
+      }
+    },
+    "verified_facts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "open_failures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "external_blocks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+  }
+}

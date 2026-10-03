@@ -1,18 +1,30 @@
-name: POD Governance Integrity
+name: POD Construction Integrity
 
 on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
-  governance:
+  integrity:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install validation dependencies
+        run: python3 -m pip install -r requirements-dev.txt
+      - name: Install protoc
+        run: sudo apt-get update && sudo apt-get install -y protobuf-compiler
       - name: Validate canonical governance
         run: python3 scripts/validate_governance.py
-      - name: Run governance regression tests
+      - name: Validate versioned contracts
+        run: python3 scripts/validate_contracts.py
+      - name: Model-check core invariants
+        run: python3 scripts/validate_formal.py
+      - name: Run regression tests
         run: python3 -m unittest discover -s tests -v
