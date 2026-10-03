@@ -32,7 +32,8 @@
     "Protobuf v1 compiles with protoc",
     "JSON Schemas validate with Draft 2020-12",
     "TLA+ PODCore model checked 2573 states / 495 distinct states with no error",
-    "Phase 1 integrity previously succeeded in GitHub Actions run 37120829030"
+    "Phase 1 integrity previously succeeded in GitHub Actions run 37120829030",
+    "Baseline v4 reconciliation commit 444cef2 passed GitHub Actions run 37130595068"
   ],
   "open_failures": [],
   "external_blocks": [],
@@ -41,6 +42,7 @@
     "EVIDENCE/F0_BASELINE_RECONCILED_2026-10-03.md",
     "EVIDENCE/F1_CORE_CONTRACTS_DEFINED_2026-10-03.md",
     "EVIDENCE/BASELINE_V4_RECONCILIATION_2026-10-03.md",
-    "GitHub Actions run 37120829030: success"
+    "GitHub Actions run 37120829030: success",
+    "GitHub Actions run 37130595068: success for baseline commit 444cef2"
   ]
 }

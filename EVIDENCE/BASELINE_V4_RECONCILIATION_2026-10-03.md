@@ -39,3 +39,10 @@ A Fase 1 já comprovada foi preservada sem regressão. A Fase 2 permanece parada
 ## Validação
 
 Validação local e GitHub Actions devem comprovar a nova Baseline antes do fechamento deste checkpoint.
+
+## Prova independente GitHub
+
+- Commit reconciliado: `444cef2`
+- GitHub Actions: `37130595068`
+- Resultado: `SUCCESS`
+- Gates executados: governança, contratos versionados, TLA+ e regressão.
