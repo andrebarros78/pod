@@ -4,10 +4,10 @@
   "repository": "https://github.com/andrebarros78/pod",
   "branch": "build/pod-foundation-v001",
   "phase": 1,
-  "phase_name": "Contratos + modelo TLA+ do núcleo",
+  "phase_name": "Contratos + modelo formal do núcleo",
   "phase_target": "CORE_CONTRACTS_DEFINED",
-  "status": "RUNNING",
-  "active_module": "core-contracts-and-formal-model",
+  "status": "PROVEN",
+  "active_module": "phase-1-closed",
   "module_status": {
     "canonical_spec": "VERIFIED",
     "github_remote": "VERIFIED",
@@ -15,7 +15,10 @@
     "github_native_adr": "VERIFIED",
     "specialist_arms_adr": "VERIFIED",
     "governance_validation": "VERIFIED",
-    "phase_0_baseline": "VERIFIED"
+    "phase_0_baseline": "VERIFIED",
+    "core_contracts_v1": "VERIFIED",
+    "formal_model": "VERIFIED",
+    "phase_1_contracts": "VERIFIED"
   },
   "verified_facts": [
     "GitHub remote andrebarros78/pod is reachable",
@@ -23,13 +26,19 @@
     "Construction branch build/pod-foundation-v001 exists on origin",
     "Canonical specification POD_PROJETO_CONSOLIDADO.md copied from Owner-provided v3.0 artifact",
     "Previous DOCSET V004 preserved under HISTORY/DOCSET_V004",
-    "Rust toolchain present: cargo 1.75.0 / rustc 1.75.0"
+    "Rust toolchain present: cargo 1.75.0 / rustc 1.75.0",
+    "Protobuf v1 compiles with protoc",
+    "JSON Schemas validate with Draft 2020-12",
+    "TLA+ PODCore model checked 2573 states / 495 distinct states with no error",
+    "GitHub Actions run 37119405072 succeeded for Phase 1 integrity"
   ],
   "open_failures": [],
   "external_blocks": [],
-  "next_action": "Create versioned Protobuf/JSON Schema contracts and validate the TLA+ core model invariants.",
+  "next_action": "Aguardar nova orientação do Owner. Não iniciar a Fase 2.",
   "evidence": [
     "EVIDENCE/F0_BASELINE_RECONCILED_2026-10-03.md",
-    "GitHub Actions run 37118761427: success"
+    "GitHub Actions run 37118761427: success",
+    "EVIDENCE/F1_CORE_CONTRACTS_DEFINED_2026-10-03.md",
+    "GitHub Actions run 37119405072: success"
   ]
 }
