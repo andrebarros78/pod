@@ -1,9 +1,9 @@
 # POD — ÍNDICE DE DECISÕES ARQUITETURAIS — V004
 
 **Identificador:** POD-DOC-012
-**Versão:** 1.2.0
+**Versão:** 1.3.0
 **Status:** ACTIVE
-**Data:** 2026-09-13
+**Data:** 2026-10-05
 **Conjunto:** POD-DOCSET-V004
 **Autoridade:** A2
 
@@ -19,6 +19,7 @@
 | [ADR-008](ADR-008-MULTIPROJETO-FEDERACAO-E-SUPERSESSAO-DA-TOPOLOGIA-ANTERIOR.md) | ACCEPTED | instalação multiprojeto e topologia evolutiva |
 | [ADR-009](ADR-009-INDEPENDENCIA-DO-CHATGPT-IA-HIBRIDA-E-TERMINAL-SOBERANO.md) | ACCEPTED | POD independente do ChatGPT, IA híbrida e terminal próprio |
 | [ADR-010](ADR-010-CORE-SELADO-SCM-SOBERANO-E-SEPARACAO-DE-ESTADO.md) | ACCEPTED | Core selado, SCM soberano, classes de estado, CAS, Execution Envelope e Integration Plane |
+| [ADR-011](ADR-011-CAPABILITY-ENGINE-AQUISICAO-PROGRESSIVA-E-EVOLUCAO-GOVERNADA.md) | ACCEPTED | Capability Engine nativo, aquisição progressiva, eval e evolução governada |
 
 ## Decisões históricas
 

@@ -7,6 +7,7 @@ O POD é um construtor soberano de software. Recebe uma missão, preserva o comp
 - Projeto conceitual e arquitetura lógica: normativos.
 - Contratos de autoridade, dados, estados, segurança e prova: normativos.
 - Independência do ChatGPT, IA híbrida e Terminal Soberano: decisão normativa.
+- Capability Engine nativo, aquisição progressiva e evolução governada: decisão normativa.
 - Matriz de requisitos e plano de construção: normativos.
 - Implementação executável: ainda não iniciada.
 - Stack física: ainda não escolhida.

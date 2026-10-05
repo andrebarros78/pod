@@ -1,9 +1,9 @@
 # POD — ARQUITETURA TÉCNICA LÓGICA — V003
 
 **Identificador:** POD-DOC-005
-**Versão:** 3.0.0
+**Versão:** 3.1.0
 **Status:** ACTIVE
-**Data:** 2026-09-13
+**Data:** 2026-10-05
 **Conjunto alvo:** POD-DOCSET-V004
 **Autoridade:** A2 — arquitetura técnica
 **Substitui:** POD_ARQUITETURA_TECNICA_V002
@@ -60,6 +60,7 @@ O Core é pequeno e selado por release.
 - Recovery;
 - Policy Engine;
 - Capability Registry;
+- Capability Engine;
 - Resource Governor.
 
 Decide, limita e coordena. Não executa efeito físico arbitrário.
@@ -174,6 +175,7 @@ Dependência reversa de fornecedor para dentro do domínio é proibida.
 | estado de missão | Mission Core |
 | estratégia | Brain |
 | procedimento técnico | Construction Engineering |
+| capacidade operacional reutilizável | Capability Engine + Capability Registry |
 | recursos e quotas | Governor / Resource Governor |
 | despacho | Scheduler |
 | execução física | Engine/Worker |
@@ -287,6 +289,40 @@ EXECUTION
 Confidence e freshness são dimensões independentes.
 
 Contradição não substitui silenciosamente conhecimento anterior. O ledger preserva a evolução e o escopo.
+
+### 10.1 Capability Engine e aquisição governada
+
+Capability é conhecimento operacional versionado, selecionável e reversível. Fonte externa é apenas insumo de descoberta e nunca autoridade de runtime.
+
+~~~text
+DISCOVER
+→ FETCH/PIN
+→ HASH
+→ LICENSE/PROVENANCE
+→ QUARANTINE
+→ NORMALIZE
+→ EVAL
+→ SECURITY/REGRESSION
+→ BENCHMARK
+→ PROMOTION GATE
+→ CAPABILITY REGISTRY
+→ PROGRESSIVE LOAD
+~~~
+
+Invariantes:
+
+~~~text
+CAPABILITY_ENGINE_IS_POD_NATIVE = TRUE
+EXTERNAL_SKILL_IS_REFERENCE_INPUT_ONLY = TRUE
+PROGRESSIVE_CAPABILITY_LOADING = TRUE
+CAPABILITY_PROMOTION_REQUIRES_EVAL = TRUE
+CAPABILITY_CANNOT_EXPAND_AUTHORITY = TRUE
+DONOR_RUNTIME_COUPLING = ZERO
+SELF_EVOLUTION_WRITES_CANDIDATE_ONLY = TRUE
+UNLICENSED_SOURCE_CONTENT_NOT_COPIED = TRUE
+~~~
+
+Carregamento segue `metadata → spec → resources`, trazendo recursos pesados somente quando necessários. Evolução gera nova versão candidata em sandbox; a versão ativa nunca é editada in-place.
 
 ## 11. Destilação
 

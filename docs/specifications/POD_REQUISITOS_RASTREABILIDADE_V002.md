@@ -1,7 +1,7 @@
 # POD — MATRIZ MESTRA DE RASTREABILIDADE E CONFORMIDADE — V002
 
 **Identificador:** POD-DOC-008
-**Versão:** 2.1.0
+**Versão:** 2.2.0
 **Status:** ACTIVE
 **Data:** 2026-09-03
 **Conjunto:** POD-DOCSET-V003
@@ -191,7 +191,24 @@ Aceite exige:
 | REQ-AI-007 | Strategy fingerprint impede repetição improdutiva | POD-DOC-006 | F6 | T-AI-008 | HIGH | DEFINED_NOT_IMPLEMENTED |
 | REQ-AI-008 | Budget Ledger separa estimativa, consumo observado e autorização | POD-DOC-006 | F6–F7 | T-AI-009 | HIGH | DEFINED_NOT_IMPLEMENTED |
 
-## 14. Independência, IA híbrida e Terminal Soberano
+## 14. Capability Engine e aquisição controlada
+
+| ID | Requisito e critério de aceite | Fonte | Fase | Teste | Criticidade | Estado |
+|---|---|---|---|---|---|---|
+| REQ-CAP-001 | Capability Registry mantém identidade e versões imutáveis | ADR-011 | F6 | T-CAP-001 | HIGH | DEFINED_NOT_IMPLEMENTED |
+| REQ-CAP-002 | Carregamento progressivo usa metadata, spec e resources sob demanda | ADR-011 | F6 | T-CAP-002 | HIGH | DEFINED_NOT_IMPLEMENTED |
+| REQ-CAP-003 | Toda aquisição registra origem, hash, licença e modo de uso | ADR-011 | F6 | T-CAP-005 | HIGH | DEFINED_NOT_IMPLEMENTED |
+| REQ-CAP-004 | Fonte externa ou catálogo não é dependência de runtime | ADR-011 | F6 | T-CAP-003,T-CAP-004 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-CAP-005 | Promoção exige eval, regressão, segurança e comparação com baseline | ADR-011 | F6,F11 | T-CAP-007,T-CAP-008,T-CAP-009 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-CAP-006 | Capability não amplia Policy, capability envelope ou Human Gate | ADR-011 | F6 | T-CAP-006 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-CAP-007 | Ferramentas, recursos, risco e custo são declarados antes da seleção | ADR-011 | F6 | T-CAP-013 | HIGH | DEFINED_NOT_IMPLEMENTED |
+| REQ-CAP-008 | Seleção registra capability_id, versão, trigger e motivo | ADR-011 | F6 | T-CAP-012,T-CAP-014 | HIGH | DEFINED_NOT_IMPLEMENTED |
+| REQ-CAP-009 | Self-evolution cria somente versão candidata em sandbox | ADR-011 | F11 | T-CAP-011 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-CAP-010 | Promoção e rollback de capability são atômicos e preservam versão anterior | ADR-011 | F11 | T-CAP-009,T-CAP-010 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-CAP-011 | Fonte não confiável permanece em quarentena até qualificação | ADR-011 | F6 | T-CAP-006,T-CAP-008 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
+| REQ-CAP-012 | Evidência material registra versão exata da capability e proveniência | ADR-011 | F6,F12 | T-CAP-014 | HIGH | DEFINED_NOT_IMPLEMENTED |
+
+## 15. Independência, IA híbrida e Terminal Soberano
 
 | ID | Requisito e critério de aceite | Fonte | Fase | Teste | Criticidade | Estado |
 |---|---|---|---|---|---|---|
@@ -211,7 +228,7 @@ Aceite exige:
 | REQ-SOV-014 | Prova não depende de texto ou sessão externa | ADR-009 | F3 | T-SOV-013 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
 | REQ-SOV-015 | API própria separa POD de APIs dos fornecedores | ADR-009 | F1,F3,F7 | T-SOV-008,T-SOV-015 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
 
-## 15. Interface e verdade operacional
+## 16. Interface e verdade operacional
 
 | ID | Requisito e critério de aceite | Fonte | Fase | Teste | Criticidade | Estado |
 |---|---|---|---|---|---|---|
@@ -222,7 +239,7 @@ Aceite exige:
 | REQ-UI-005 | Interface mostra bloqueio, ramo e condição de retomada | POD-DOC-004 | F3 | T-UI-005 | HIGH | DEFINED_NOT_IMPLEMENTED |
 | REQ-UI-006 | READY representa saúde funcional | POD-DOC-005 | F3 | T-UI-006 | HIGH | DEFINED_NOT_IMPLEMENTED |
 
-## 16. Operação e recuperação
+## 17. Operação e recuperação
 
 | ID | Requisito e critério de aceite | Fonte | Fase | Teste | Criticidade | Estado |
 |---|---|---|---|---|---|---|
@@ -234,7 +251,7 @@ Aceite exige:
 | REQ-OPS-006 | Configuração inválida ou store indisponível impede READY falso | POD-DOC-005 | F0,F13 | T-OPS-006,T-OPS-007 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
 | REQ-OPS-007 | Queda de canal não interrompe execução local já aceita | POD-DOC-003 | F3 | T-OPS-008 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
 
-## 17. Produto e entrega
+## 18. Produto e entrega
 
 | ID | Requisito e critério de aceite | Fonte | Fase | Teste | Criticidade | Estado |
 |---|---|---|---|---|---|---|
@@ -247,11 +264,11 @@ Aceite exige:
 | REQ-DEL-007 | Evidence Pack final liga todos os gates | POD-DOC-006 | F12,F15 | T-PROD-008 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
 | REQ-DEL-008 | E2E soberano constrói, falha, recupera, entrega e prova | POD-DOC-009 | F15 | T-PROD-002,T-PROD-008,T-OPS-002 | CRITICAL | DEFINED_NOT_IMPLEMENTED |
 
-## 18. Resumo inicial
+## 19. Resumo inicial
 
 | Estado | Quantidade esperada antes da validação |
 |---|---:|
 | ACCEPTED | 6 |
-| DEFINED_NOT_IMPLEMENTED | 119 |
+| DEFINED_NOT_IMPLEMENTED | 131 |
 
 As quantidades são verificadas automaticamente. Após T-DOC aprovado e evidenciado, somente REQ-DOC pode avançar para ACCEPTED. Os demais permanecem não implementados até prova do runtime.

@@ -1,9 +1,9 @@
 # POD — ÍNDICE MESTRE DE DOCUMENTOS E PRECEDÊNCIA — V004
 
 **Identificador:** POD-DOC-001
-**Versão:** 4.0.0
+**Versão:** 4.1.0
 **Status:** ACTIVE
-**Data:** 2026-09-13
+**Data:** 2026-10-05
 **Conjunto:** POD-DOCSET-V004
 **Autoridade:** A1 — autoridade documental
 **Substitui:** POD-DOCSET-V003 como conjunto ativo quando o manifesto V004 validar
@@ -40,7 +40,7 @@ Em conflito, prevalece a primeira fonte aplicável:
 
 1. lei, licença, limitação física e decisão legítima do Owner;
 2. este Índice Mestre e manifesto V004 íntegro;
-3. Baseline V003 e DNA Operacional V002, exceto onde ADR-010 e Arquitetura V003 especificarem fronteira mais nova;
+3. Baseline V003 e DNA Operacional V002, exceto onde ADR-010, ADR-011 e Arquitetura V003 especificarem fronteira mais nova;
 4. política de segurança e autorizações;
 5. ADR ativo específico;
 6. Arquitetura Técnica V003;
@@ -74,6 +74,7 @@ Em conflito, prevalece a primeira fonte aplicável:
 | 19 | POD-ADR-009 | [ADR-009](adr/ADR-009-INDEPENDENCIA-DO-CHATGPT-IA-HIBRIDA-E-TERMINAL-SOBERANO.md) | A1 | independência, IA híbrida e terminal |
 | 20 | POD-ADR-010 | [ADR-010](adr/ADR-010-CORE-SELADO-SCM-SOBERANO-E-SEPARACAO-DE-ESTADO.md) | A1/A2 | Core selado e SCM soberano |
 | 21 | POD-DOC-013 | [Core, SCM, Storage e Execution Envelope V001](specifications/POD_CORE_SCM_ARMAZENAMENTO_EXECUTION_ENVELOPE_V001.md) | A2 | contratos novos da reconciliação |
+| 22 | POD-ADR-011 | [ADR-011](adr/ADR-011-CAPABILITY-ENGINE-AQUISICAO-PROGRESSIVA-E-EVOLUCAO-GOVERNADA.md) | A2 | Capability Engine, aquisição progressiva, eval e evolução governada |
 
 ## 5. Reconciliação normativa
 
@@ -116,6 +117,7 @@ Continuam normativos:
 - IA é multi-provider e substituível;
 - POD possui terminal próprio e não depende estruturalmente do ChatGPT/MCP;
 - evidência, estado e eventos continuam auditáveis.
+- capabilities externas entram em quarentena, são normalizadas para contratos POD-native e só promovidas após eval, segurança e benchmark.
 
 ## 7. Documentos substituídos especificamente
 
@@ -164,4 +166,4 @@ Linhas são ordenadas por `order`; o manifesto não inclui a si próprio no set 
 
 ## 10. Regra final
 
-Qualquer implementação nova deve seguir a Arquitetura Técnica V003, ADR-010 e POD-DOC-013 para os assuntos reconciliados. O restante do DOCSET V003 permanece aplicável enquanto não conflitar com essas decisões específicas.
+Qualquer implementação nova deve seguir a Arquitetura Técnica V003, ADR-010, ADR-011 e POD-DOC-013 para os assuntos reconciliados. O restante do DOCSET V003 permanece aplicável enquanto não conflitar com essas decisões específicas.

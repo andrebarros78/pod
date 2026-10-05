@@ -1,7 +1,7 @@
 # POD — ARQUITETURA TÉCNICA LÓGICA — V002
 
 **Identificador:** POD-DOC-005
-**Versão:** 2.0.0
+**Versão:** 2.1.0
 **Status:** ACTIVE
 **Data:** 2026-09-02
 **Conjunto:** POD-DOCSET-V003
@@ -54,6 +54,7 @@ RUNTIME → composição das anteriores
 - Mission Core;
 - Brain;
 - Construction Engineering;
+- Capability Engine;
 - Governor;
 - Scheduler;
 - Policy.
@@ -114,6 +115,7 @@ Planos são responsabilidades. Não exigem processos separados.
 | Mission Core | comando/verdict/evento | novo estado atômico | estado da missão |
 | Brain | objetivo/contexto/evidência | estratégia e plano candidato | estratégia |
 | Construction Engineering | estratégia | WorkUnits e artefatos candidatos | procedimento técnico |
+| Capability Engine | objetivo/contexto/evidência | capability versionada e recursos sob demanda | seleção e lifecycle de capacidade sem ampliar autoridade |
 | Governor | demanda e recursos | quotas e prioridade | recursos |
 | Scheduler | WorkUnits autorizadas | dispatch | tempo e destino permitidos |
 | Engine | envelope | fatos, efeitos e evidências | execução física limitada |
@@ -394,6 +396,8 @@ Knowledge Store é separado de:
 - Training Dataset.
 
 Promoção exige proveniência e gate. Conteúdo não confiável pode ser consultado como referência, mas não injeta regra soberana.
+
+Capability Engine mantém Registry versionado e carregamento progressivo `metadata → spec → resources`. Fonte externa inicia em quarentena, não participa do runtime e somente origina uma capability POD-native após normalização, eval, segurança, benchmark e Promotion Gate. Autoevolução gera versão candidata em sandbox; não edita capability ativa.
 
 ## 20. Produto construído
 

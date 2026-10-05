@@ -1,7 +1,7 @@
 # POD — PLANO MESTRE DE CONSTRUÇÃO — V002
 
 **Identificador:** POD-DOC-009
-**Versão:** 2.1.0
+**Versão:** 2.2.0
 **Status:** ACTIVE
 **Data:** 2026-09-03
 **Conjunto:** POD-DOCSET-V003
@@ -274,6 +274,10 @@ Concorrência aumenta capacidade sem duplicar efeito nem perder estado.
 - Brain orchestration;
 - context builder;
 - Knowledge Store;
+- Capability Registry e Capability Router;
+- progressive capability loader (`metadata → spec → resources`);
+- acquisition/quarantine/normalization pipeline;
+- eval harness e promotion gate;
 - provenance/trust/validity;
 - strategy fingerprint;
 - planner/replanner;
@@ -283,6 +287,10 @@ Concorrência aumenta capacidade sem duplicar efeito nem perder estado.
 ### Testar
 
 - conteúdo tenta alterar policy;
+- capability tenta ampliar autoridade;
+- source repo fica indisponível após promoção e runtime continua;
+- progressive loading carrega somente recursos necessários;
+- donor coupling scan retorna zero no runtime;
 - conhecimento stale;
 - contexto excede limite;
 - estratégia repetida;
@@ -406,6 +414,10 @@ Incidente é detectado, contido, recuperado e auditado.
 ### Entregar
 
 - Learning Candidate;
+- Capability Candidate versionada em sandbox;
+- benchmark baseline/candidate;
+- promoção atômica e rollback de capability;
+- self-evolution candidate-only;
 - promotion workflow;
 - Training Eligibility Gate;
 - dataset versionado;
@@ -418,6 +430,9 @@ Incidente é detectado, contido, recuperado e auditado.
 - dado secreto;
 - dado não elegível;
 - regressão do modelo;
+- regressão de capability candidata;
+- tentativa de editar versão ativa durante self-evolution;
+- rollback após promoção defeituosa;
 - promoção sem evidência.
 
 ### Gate de saída
