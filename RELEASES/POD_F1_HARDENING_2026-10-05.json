@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "release_id": "POD-F1-HARDENING-2026-10-05",
+  "status": "CANDIDATE",
+  "canonical_target_branch": "main",
+  "source_branch": "reconcile/f1-hardening-privacy-20261005",
+  "scope": [
+    "privacy_sensitive_data_reconciliation",
+    "proof_verdict_hardening",
+    "fencing_model_hardening",
+    "ade_contracts",
+    "execution_fabric_contracts",
+    "canonical_root_reconciliation"
+  ],
+  "runtime_implementation_claimed": false,
+  "phase_2_started": false,
+  "validated_commit": null,
+  "github_actions_run": null,
+  "github_actions_status": "NOT_VERIFIED"
+}

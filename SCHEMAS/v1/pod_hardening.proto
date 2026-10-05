@@ -1,0 +1,354 @@
+syntax = "proto3";
+
+package pod.v1;
+
+import "google/protobuf/timestamp.proto";
+import "pod.proto";
+
+// Additive F1 hardening contracts. This file imports pod.proto so the original v1
+// baseline stays backward-compatible while proof, privacy, ADE and Fabric
+// semantics become explicit.
+
+enum DataClassification {
+  DATA_CLASSIFICATION_UNSPECIFIED = 0;
+  DATA_PUBLIC = 1;
+  DATA_INTERNAL = 2;
+  DATA_CONFIDENTIAL = 3;
+  DATA_RESTRICTED = 4;
+}
+
+enum TriState {
+  TRI_STATE_UNSPECIFIED = 0;
+  TRI_FALSE = 1;
+  TRI_TRUE = 2;
+  TRI_UNKNOWN = 3;
+}
+
+enum PrivacyDecisionOutcome {
+  PRIVACY_DECISION_OUTCOME_UNSPECIFIED = 0;
+  PRIVACY_ALLOW = 1;
+  PRIVACY_DENY = 2;
+  PRIVACY_REQUIRE_HUMAN_LEGAL_INPUT = 3;
+}
+
+enum LoggingPolicy {
+  LOGGING_POLICY_UNSPECIFIED = 0;
+  LOG_METADATA_ONLY = 1;
+  LOG_REDACTED = 2;
+  LOG_CONTENT_ALLOWED = 3;
+}
+
+enum ProofVerdictOutcome {
+  PROOF_VERDICT_OUTCOME_UNSPECIFIED = 0;
+  PROOF_PASS = 1;
+  PROOF_FAIL = 2;
+  PROOF_BLOCKED = 3;
+  PROOF_INVALID = 4;
+}
+
+enum DispatchAckState {
+  DISPATCH_ACK_STATE_UNSPECIFIED = 0;
+  DISPATCH_ACCEPTED_DURABLY = 1;
+  DISPATCH_REJECTED = 2;
+  DISPATCH_DUPLICATE = 3;
+}
+
+message DataPolicyEnvelope {
+  string data_id = 1;
+  string project_id = 2;
+  DataClassification classification = 3;
+  TriState personal_data = 4;
+  TriState sensitive_personal_data = 5;
+  TriState child_or_adolescent_data = 6;
+  string subject_category = 7;
+  string controller_ref = 8;
+  repeated string operator_refs = 9;
+  repeated string purpose_refs = 10;
+  repeated string authority_refs = 11;
+  string source_ref = 12;
+  string lineage_ref = 13;
+  string retention_policy_ref = 14;
+  repeated string allowed_operations = 15;
+  repeated string allowed_destinations = 16;
+  repeated string allowed_projects = 17;
+  bool external_processing_allowed = 18;
+  string international_transfer_policy_ref = 19;
+  LoggingPolicy logging_policy = 20;
+  bool encryption_required = 21;
+  string policy_version = 22;
+  google.protobuf.Timestamp created_at = 23;
+}
+
+message PrivacyDecision {
+  string decision_id = 1;
+  string project_id = 2;
+  string operation_id = 3;
+  repeated string data_ids = 4;
+  string operation = 5;
+  string purpose_id = 6;
+  string policy_version = 7;
+  string destination_ref = 8;
+  string processor_ref = 9;
+  PrivacyDecisionOutcome decision = 10;
+  repeated string reason_codes = 11;
+  bool minimization_applied = 12;
+  repeated string transformation_refs = 13;
+  google.protobuf.Timestamp expires_at = 14;
+  google.protobuf.Timestamp decided_at = 15;
+  string engine_version = 16;
+}
+
+message SensitiveDataSecurityProfile {
+  bool active = 1;
+  bool encryption_at_rest_required = 2;
+  bool key_separation_required = 3;
+  bool encrypted_backup_required = 4;
+  bool encrypted_restore_path_required = 5;
+  bool privileged_human_mfa_required = 6;
+  bool critical_key_operation_mfa_required = 7;
+  bool privileged_access_audit_required = 8;
+  string key_policy_ref = 9;
+}
+
+message ProofGateState {
+  bool evidence_complete = 1;
+  bool acceptance_pass = 2;
+  bool regression_pass = 3;
+  bool checkpoint_present = 4;
+  bool security_gate_pass = 5;
+  bool privacy_gate_pass = 6;
+  bool privacy_gate_applicable = 7;
+  bool sensitive_data_security_gate_pass = 8;
+  bool sensitive_data_security_gate_applicable = 9;
+  bool recovery_pass = 10;
+  bool donor_decoupling_pass = 11;
+  bool project_isolation_pass = 12;
+}
+
+message EvidenceManifest {
+  string manifest_id = 1;
+  string mission_id = 2;
+  string project_id = 3;
+  repeated string acceptance_criteria_ids = 4;
+  repeated string required_test_ids = 5;
+  repeated EvidenceRecord evidence = 6;
+  HashPointer manifest_content_ref = 7;
+  string policy_version = 8;
+  google.protobuf.Timestamp created_at = 9;
+}
+
+message ProofVerdict {
+  string verdict_id = 1;
+  string mission_id = 2;
+  string project_id = 3;
+  ProofVerdictOutcome outcome = 4;
+  ProofGateState gates = 5;
+  string mission_resource_version = 6;
+  string acceptance_contract_version = 7;
+  string policy_version = 8;
+  HashPointer evidence_manifest_ref = 9;
+  repeated string failed_gate_codes = 10;
+  google.protobuf.Timestamp issued_at = 11;
+  google.protobuf.Timestamp valid_until = 12;
+}
+
+message ProofConsumption {
+  string consumption_id = 1;
+  string verdict_id = 2;
+  string mission_id = 3;
+  string expected_mission_resource_version = 4;
+  bool freshness_validated = 5;
+  bool guards_validated = 6;
+  bool transitioned_to_mission_proven = 7;
+  google.protobuf.Timestamp consumed_at = 8;
+}
+
+message LeaseAuthorityPresentation {
+  string lease_id = 1;
+  string execution_id = 2;
+  string holder_node_id = 3;
+  uint64 generation = 4;
+  uint64 fencing_token = 5;
+  uint64 expected_resource_version = 6;
+  google.protobuf.Timestamp expires_at = 7;
+}
+
+message GovernedExecutionRequest {
+  ExecutionRequest request = 1;
+  LeaseAuthorityPresentation authority = 2;
+  HashPointer execution_envelope_ref = 3;
+  string idempotency_key = 4;
+}
+
+message RepositoryInspection {
+  string inspection_id = 1;
+  string mission_id = 2;
+  string project_id = 3;
+  string repository_url = 4;
+  string base_ref = 5;
+  repeated HashPointer inspected_refs = 6;
+  repeated string findings = 7;
+  google.protobuf.Timestamp completed_at = 8;
+}
+
+message ChangePlan {
+  string change_plan_id = 1;
+  string mission_id = 2;
+  string project_id = 3;
+  repeated string objectives = 4;
+  repeated string files_expected_to_change = 5;
+  repeated string required_test_ids = 6;
+  repeated string rollback_steps = 7;
+  HashPointer plan_ref = 8;
+}
+
+message ChangeSet {
+  string change_set_id = 1;
+  string change_plan_id = 2;
+  string mission_id = 3;
+  string project_id = 4;
+  repeated HashPointer changed_artifact_refs = 5;
+  string git_intent_ref = 6;
+}
+
+message TestRun {
+  string test_run_id = 1;
+  string mission_id = 2;
+  string task_id = 3;
+  repeated string test_ids = 4;
+  bool passed = 5;
+  repeated EvidenceRecord evidence = 6;
+  google.protobuf.Timestamp completed_at = 7;
+}
+
+message FailureDiagnosis {
+  string diagnosis_id = 1;
+  string mission_id = 2;
+  string task_id = 3;
+  string failure_fingerprint = 4;
+  repeated string hypotheses = 5;
+  string selected_root_cause = 6;
+  repeated EvidenceRecord evidence = 7;
+}
+
+message CorrectionAttempt {
+  string attempt_id = 1;
+  string diagnosis_id = 2;
+  string mission_id = 3;
+  string task_id = 4;
+  uint32 attempt_number = 5;
+  HashPointer change_ref = 6;
+  string strategy = 7;
+  bool changed_strategy_from_previous = 8;
+}
+
+message RegressionResult {
+  string regression_id = 1;
+  string mission_id = 2;
+  string project_id = 3;
+  repeated string test_ids = 4;
+  bool passed = 5;
+  repeated EvidenceRecord evidence = 6;
+}
+
+message ADECheckpoint {
+  string ade_checkpoint_id = 1;
+  string mission_id = 2;
+  string project_id = 3;
+  string objective = 4;
+  HashPointer plan_ref = 5;
+  repeated HashPointer analyzed_file_refs = 6;
+  repeated string hypotheses = 7;
+  repeated string changed_files = 8;
+  repeated string test_run_ids = 9;
+  repeated string diagnosis_ids = 10;
+  repeated string correction_attempt_ids = 11;
+  repeated EvidenceRecord evidence = 12;
+  string next_step = 13;
+  google.protobuf.Timestamp created_at = 14;
+}
+
+message ADEProof {
+  string ade_proof_id = 1;
+  string mission_id = 2;
+  bool repository_inspection_pass = 3;
+  bool code_understanding_pass = 4;
+  bool change_planning_pass = 5;
+  bool implementation_pass = 6;
+  bool execution_pass = 7;
+  bool testing_pass = 8;
+  bool failure_diagnosis_pass = 9;
+  bool autonomous_correction_pass = 10;
+  bool retest_pass = 11;
+  bool integration_pass = 12;
+  bool regression_pass = 13;
+  bool evidence_pass = 14;
+  bool checkpoint_pass = 15;
+  bool recovery_pass = 16;
+  bool security_policy_pass = 17;
+  bool git_policy_pass = 18;
+  HashPointer evidence_manifest_ref = 19;
+}
+
+message DispatchEnvelope {
+  string dispatch_id = 1;
+  string mission_id = 2;
+  string task_id = 3;
+  string project_id = 4;
+  string target_node_id = 5;
+  string capability_id = 6;
+  GovernedExecutionRequest governed_request = 7;
+  uint32 delivery_attempt = 8;
+  string idempotency_key = 9;
+  google.protobuf.Timestamp created_at = 10;
+}
+
+message DispatchAck {
+  string ack_id = 1;
+  string dispatch_id = 2;
+  string node_id = 3;
+  DispatchAckState state = 4;
+  uint64 accepted_generation = 5;
+  uint64 accepted_fencing_token = 6;
+  google.protobuf.Timestamp acknowledged_at = 7;
+}
+
+message InboxRecord {
+  string inbox_record_id = 1;
+  string node_id = 2;
+  string dispatch_id = 3;
+  string idempotency_key = 4;
+  bool durable = 5;
+  bool duplicate = 6;
+  google.protobuf.Timestamp persisted_at = 7;
+}
+
+message RouteDecision {
+  string route_decision_id = 1;
+  string mission_id = 2;
+  string task_id = 3;
+  repeated string candidate_node_ids = 4;
+  string selected_node_id = 5;
+  repeated string decision_factors = 6;
+  string capability_snapshot_id = 7;
+  google.protobuf.Timestamp decided_at = 8;
+}
+
+message CapabilitySnapshot {
+  string capability_snapshot_id = 1;
+  string node_id = 2;
+  uint64 node_generation = 3;
+  repeated CapabilityDescriptor capabilities = 4;
+  google.protobuf.Timestamp observed_at = 5;
+}
+
+message ReconciliationRecord {
+  string reconciliation_id = 1;
+  string node_id = 2;
+  uint64 node_generation = 3;
+  repeated string pending_dispatch_ids = 4;
+  repeated string completed_execution_ids = 5;
+  repeated string rejected_stale_execution_ids = 6;
+  repeated string conflict_codes = 7;
+  google.protobuf.Timestamp reconciled_at = 8;
+}

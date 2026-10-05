@@ -2,47 +2,83 @@
 
 O POD é uma Plataforma Orquestradora Durável, soberana e multiprojeto. Recebe objetivos humanos e assume a complexidade técnica necessária até produzir resultados funcionais, integrados, seguros, recuperáveis, documentados e comprovados.
 
-## Fonte canônica atual
+## Raiz canônica
 
-A linha documental ativa desta Baseline é:
+A branch canônica é `main`.
 
-1. [`POD_DOCUMENTACAO_CONSOLIDADA_CANONICA.md`](POD_DOCUMENTACAO_CONSOLIDADA_CANONICA.md) — fonte arquitetural consolidada, versão 4.0.0-DRAFT-CANONICAL;
-2. [`POD_BASELINE_CANONICA_AQUISICAO_EVOLUCAO_HIGIENE.md`](POD_BASELINE_CANONICA_AQUISICAO_EVOLUCAO_HIGIENE.md) — política canônica de aquisição, evolução e higiene;
-3. [`ADR/`](ADR/) — decisões arquiteturais posteriores;
-4. [`SCHEMAS/`](SCHEMAS/) e [`CONTRACTS/`](CONTRACTS/) — contratos formais e instanciados;
-5. [`STANDARDS/`](STANDARDS/) — normas transversais especializadas;
-6. [`RUNBOOKS/`](RUNBOOKS/), [`EVIDENCE/`](EVIDENCE/) e [`RELEASES/`](RELEASES/) — operação, prova e manifestos;
-7. [`HISTORY/`](HISTORY/) — material histórico com `NORMATIVE=false`.
+A ordem operacional de leitura é:
 
-A síntese v3 anterior foi preservada em `HISTORY/POD_PROJETO_CONSOLIDADO_v3.0.md` e não compete com a Baseline ativa.
+1. [`POD_DOCUMENTACAO_CONSOLIDADA_CANONICA.md`](POD_DOCUMENTACAO_CONSOLIDADA_CANONICA.md) — arquitetura consolidada;
+2. [`POD_BASELINE_CANONICA_AQUISICAO_EVOLUCAO_HIGIENE.md`](POD_BASELINE_CANONICA_AQUISICAO_EVOLUCAO_HIGIENE.md) — aquisição, evolução e higiene;
+3. [`POD_RECONCILIACAO_CANONICA_F1_2026-10-05.md`](POD_RECONCILIACAO_CANONICA_F1_2026-10-05.md) — fechamento das lacunas F1 de prova, fencing, Privacy/Sensitive Data, ADE e Execution Fabric;
+4. [`ADR/`](ADR/) — decisões arquiteturais posteriores;
+5. [`SCHEMAS/`](SCHEMAS/) e [`CONTRACTS/`](CONTRACTS/) — contratos formais;
+6. [`STANDARDS/`](STANDARDS/) — normas transversais;
+7. [`RUNBOOKS/`](RUNBOOKS/), [`EVIDENCE/`](EVIDENCE/) e [`RELEASES/`](RELEASES/) — operação, prova e releases;
+8. [`HISTORY/`](HISTORY/) — histórico com `NORMATIVE=false`.
 
-## GitHub nativo
+Nenhuma branch de trabalho substitui `main` como fonte canônica após promoção e validação.
 
-Repositório canônico: `https://github.com/andrebarros78/pod`
+## Estado atual
 
-O GitHub é o SCM nativo do POD para código, branches, pull requests, tags, releases, checks e trilha de integração. A soberania de missão pertence ao Governador do POD; GitHub não substitui estado operacional de missão nem autoridade de prova.
+- Fase 0 — `BASELINE_RECONCILED`: comprovada.
+- Fase 1 — `CORE_CONTRACTS_DEFINED`: comprovada no escopo contratual/formal.
+- Hardening F1 de 05/10/2026: em reconciliação até o CI do commit candidato e, após evidência, promovido a comprovado.
+- Fase 2 — `MVP_PROVEN`: **não iniciada**.
+- Runtime do POD: **não implementado**.
+- Privacy Kernel runtime: **não implementado**.
+- ADE runtime: **não implementado**.
+- Execution Fabric runtime: **não implementado**.
 
-## Estratégia de evolução
+Documento, contrato e modelo formal não são prova de runtime.
 
-A Baseline adota `REUSE FIRST`:
+## Contratos F1
 
-`PESQUISAR → ADQUIRIR QUANDO VANTAJOSO → SANITIZAR → NORMALIZAR → CONTEXTUALIZAR → VALIDAR → CONTRATUALIZAR → INTEGRAR → PROVAR → CONSTRUIR SOMENTE O DIFERENCIAL AUSENTE`
+A base versionada contém:
 
-Componente existente não é componente qualificado; componente qualificado não é componente integrado; componente integrado não é capacidade provada.
+- `SCHEMAS/v1/pod.proto` — contratos F1 originais;
+- `SCHEMAS/v1/pod_hardening.proto` — extensão aditiva para prova, privacy, ADE, fencing e Execution Fabric;
+- JSON Schemas para estado de missão, contratos de módulo, `DataPolicyEnvelope`, `PrivacyDecision` e `ProofVerdict`;
+- TLA+ para invariantes de missão, gates de prova, lease/fencing e stale worker.
 
-## Estado da construção
+## Regra de conclusão
 
-- Fase 0 — `BASELINE_RECONCILED`: reconciliada documentalmente com a Baseline v4.
-- Fase 1 — `CORE_CONTRACTS_DEFINED`: comprovada; contratos v1 e modelo formal preservados.
-- Fase 2 — `MVP_PROVEN`: **não iniciada por ordem do Owner**.
+```text
+MISSION_GIVEN
+→ MISSION_ACCEPTED
+→ WORK
+→ EVIDENCE
+→ ACCEPTANCE
+→ REGRESSION
+→ CHECKPOINT
+→ SECURITY/PRIVACY/RECOVERY GATES
+→ FRESH PROOF VERDICT
+→ MISSION_PROVEN
+```
 
-O estado operacional persistente está em [`MISSION_STATE.json`](MISSION_STATE.json).
+`MISSION_PROVEN` não pode ser inferido de código escrito, build verde, processo rodando, endpoint disponível, commit, painel ou texto de IA.
 
-## Regra de prova
+## REUSE FIRST
 
-Código escrito, build verde, processo rodando, endpoint respondendo, componente instalado, agente registrado, commit criado ou painel verde não equivalem a conclusão comprovada.
+```text
+PESQUISAR
+→ ANALISAR
+→ COMPARAR
+→ SELECIONAR
+→ ADQUIRIR
+→ SANITIZAR
+→ NORMALIZAR E QUALIFICAR
+→ CONTEXTUALIZAR
+→ VALIDAR
+→ CONTRATUALIZAR
+→ INTEGRAR
+→ PROVAR
+→ CONSTRUIR SOMENTE O DIFERENCIAL AUSENTE
+```
 
-## Validação local
+A seleção documental de componentes não equivale a aquisição, integração ou capacidade provada.
+
+## Validar
 
 ```bash
 python3 scripts/validate_governance.py
@@ -50,3 +86,9 @@ python3 scripts/validate_contracts.py
 python3 scripts/validate_formal.py
 python3 -m unittest discover -s tests -v
 ```
+
+O GitHub Actions executa os mesmos gates.
+
+## Próxima fase
+
+Somente depois desta reconciliação estar verde e promovida à `main`, a próxima missão pode iniciar a **Fase 2 — fatia vertical mínima**, mantendo a raiz canônica e `MISSION_STATE.json` como ponto de continuidade.

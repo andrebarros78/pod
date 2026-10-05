@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/andrebarros78/pod/SCHEMAS/v1/proof_verdict.schema.json",
+  "title": "POD ProofVerdict",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verdict_id", "mission_id", "project_id", "outcome", "mission_resource_version", "acceptance_contract_version", "policy_version", "evidence_manifest_ref", "issued_at", "gates"],
+  "properties": {
+    "verdict_id": {"type": "string", "minLength": 1},
+    "mission_id": {"type": "string", "minLength": 1},
+    "project_id": {"type": "string", "minLength": 1},
+    "outcome": {"enum": ["PASS", "FAIL", "BLOCKED", "INVALID"]},
+    "mission_resource_version": {"type": "string", "minLength": 1},
+    "acceptance_contract_version": {"type": "string", "minLength": 1},
+    "policy_version": {"type": "string", "minLength": 1},
+    "evidence_manifest_ref": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "failed_gate_codes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "issued_at": {"type": "string", "format": "date-time"},
+    "valid_until": {"type": ["string", "null"], "format": "date-time"},
+    "gates": {
+      "type": "object", "additionalProperties": false,
+      "required": ["evidence_complete", "acceptance_pass", "regression_pass", "checkpoint_present", "security_gate_pass", "privacy_gate_applicable", "privacy_gate_pass", "sensitive_data_security_gate_applicable", "sensitive_data_security_gate_pass", "recovery_pass", "donor_decoupling_pass", "project_isolation_pass"],
+      "properties": {
+        "evidence_complete": {"type": "boolean"}, "acceptance_pass": {"type": "boolean"}, "regression_pass": {"type": "boolean"}, "checkpoint_present": {"type": "boolean"}, "security_gate_pass": {"type": "boolean"}, "privacy_gate_applicable": {"type": "boolean"}, "privacy_gate_pass": {"type": "boolean"}, "sensitive_data_security_gate_applicable": {"type": "boolean"}, "sensitive_data_security_gate_pass": {"type": "boolean"}, "recovery_pass": {"type": "boolean"}, "donor_decoupling_pass": {"type": "boolean"}, "project_isolation_pass": {"type": "boolean"}
+      }
+    }
+  },
+  "allOf": [
+    {"if": {"properties": {"outcome": {"const": "PASS"}}, "required": ["outcome"]}, "then": {"properties": {"gates": {"properties": {"evidence_complete": {"const": true}, "acceptance_pass": {"const": true}, "regression_pass": {"const": true}, "checkpoint_present": {"const": true}, "security_gate_pass": {"const": true}, "recovery_pass": {"const": true}, "donor_decoupling_pass": {"const": true}, "project_isolation_pass": {"const": true}}}}}},
+    {"if": {"allOf": [{"properties": {"outcome": {"const": "PASS"}}, "required": ["outcome"]}, {"properties": {"gates": {"properties": {"privacy_gate_applicable": {"const": true}}}}}]}, "then": {"properties": {"gates": {"properties": {"privacy_gate_pass": {"const": true}}}}}},
+    {"if": {"allOf": [{"properties": {"outcome": {"const": "PASS"}}, "required": ["outcome"]}, {"properties": {"gates": {"properties": {"sensitive_data_security_gate_applicable": {"const": true}}}}}]}, "then": {"properties": {"gates": {"properties": {"sensitive_data_security_gate_pass": {"const": true}}}}}}
+  ]
+}
