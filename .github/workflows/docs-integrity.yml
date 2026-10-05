@@ -1,48 +1,32 @@
-name: docs-integrity
+name: POD Construction Integrity
 
 on:
-  pull_request:
-    paths:
-      - "README.md"
-      - "docs/**"
-      - "scripts/validate_docs.py"
-      - "scripts/validate_docs_v003_compat.py"
-      - "scripts/validate_docs_v004.py"
-      - "tests/**"
-      - ".github/workflows/docs-integrity.yml"
   push:
-    branches:
-      - main
-    paths:
-      - "README.md"
-      - "docs/**"
-      - "scripts/validate_docs.py"
-      - "scripts/validate_docs_v003_compat.py"
-      - "scripts/validate_docs_v004.py"
-      - "tests/**"
-      - ".github/workflows/docs-integrity.yml"
+  pull_request:
 
 permissions:
   contents: read
 
 jobs:
-  validate:
+  integrity:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
-          python-version: "3.12"
-
-      - name: Validate historical POD DOCSET V003
-        run: python scripts/validate_docs_v003_compat.py
-
-      - name: Validate reconciled POD DOCSET V004
-        run: python scripts/validate_docs_v004.py
-
-      - name: Test validator failure detection
-        run: python -m unittest discover -s tests -v
+          python-version: '3.12'
+      - name: Install validation dependencies
+        run: python3 -m pip install -r requirements-dev.txt
+      - name: Install protoc
+        run: sudo apt-get update && sudo apt-get install -y protobuf-compiler
+      - name: Validate canonical governance
+        run: python3 scripts/validate_governance.py
+      - name: Validate versioned contracts
+        run: python3 scripts/validate_contracts.py
+      - name: Validate capability acquisition reconciliation
+        run: python3 scripts/validate_capability_acquisition.py
+      - name: Model-check core invariants
+        run: python3 scripts/validate_formal.py
+      - name: Run regression tests
+        run: python3 -m unittest discover -s tests -v

@@ -1,65 +1,97 @@
 # POD — Plataforma Orquestradora Durável
 
-O POD é um construtor soberano de software. Recebe uma missão, preserva o compromisso assumido, planeja, executa, testa, recupera falhas e somente conclui quando o resultado estiver comprovado.
+O POD é uma Plataforma Orquestradora Durável, soberana e multiprojeto. Recebe objetivos humanos e assume a complexidade técnica necessária até produzir resultados funcionais, integrados, seguros, recuperáveis, documentados e comprovados.
 
-## Estado atual
+## Raiz canônica
 
-- Projeto conceitual e arquitetura lógica: normativos.
-- Contratos de autoridade, dados, estados, segurança e prova: normativos.
-- Independência do ChatGPT, IA híbrida e Terminal Soberano: decisão normativa.
-- Capability Engine nativo, aquisição progressiva e evolução governada: decisão normativa.
-- Matriz de requisitos e plano de construção: normativos.
-- Implementação executável: ainda não iniciada.
-- Stack física: ainda não escolhida.
+A branch canônica é `main`.
 
-Documento normativo não é prova de implementação. O estado inicial dos requisitos permanece **DEFINED_NOT_IMPLEMENTED**.
+A ordem operacional de leitura é:
 
-## Entrada oficial
+1. [`POD_DOCUMENTACAO_CONSOLIDADA_CANONICA.md`](POD_DOCUMENTACAO_CONSOLIDADA_CANONICA.md) — arquitetura consolidada;
+2. [`POD_BASELINE_CANONICA_AQUISICAO_EVOLUCAO_HIGIENE.md`](POD_BASELINE_CANONICA_AQUISICAO_EVOLUCAO_HIGIENE.md) — aquisição, evolução e higiene;
+3. [`POD_RECONCILIACAO_CANONICA_F1_2026-10-05.md`](POD_RECONCILIACAO_CANONICA_F1_2026-10-05.md) — fechamento F1 e reconciliação concorrente;
+4. [`ADR/`](ADR/) — decisões arquiteturais posteriores;
+5. [`SCHEMAS/`](SCHEMAS/) e [`CONTRACTS/`](CONTRACTS/) — contratos formais;
+6. [`STANDARDS/`](STANDARDS/) — normas transversais;
+7. [`RUNBOOKS/`](RUNBOOKS/), [`EVIDENCE/`](EVIDENCE/) e [`RELEASES/`](RELEASES/) — operação, prova e releases;
+8. [`HISTORY/`](HISTORY/) — histórico com `NORMATIVE=false`.
 
-Leia primeiro o [Índice Mestre V003](docs/POD_INDICE_MESTRE_V003.md). Ele define:
+Nenhuma branch de trabalho substitui `main` como fonte canônica após promoção e validação.
 
-- o conjunto documental ativo;
-- a precedência entre documentos;
-- os artefatos substituídos;
-- a ordem obrigatória de leitura;
-- a forma de verificar integridade.
+## Estado atual desta reconciliação
 
-O manifesto verificável está em [POD_DOCUMENT_MANIFEST_V003.json](docs/POD_DOCUMENT_MANIFEST_V003.json).
-A execução da validação está registrada em [POD_DOCSET_V003_VALIDATION.md](docs/evidence/POD_DOCSET_V003_VALIDATION.md).
+- Fase 0 — `BASELINE_RECONCILED`: comprovada.
+- Fase 1 — `CORE_CONTRACTS_DEFINED`: comprovada no escopo contratual/formal anterior.
+- Hardening F1 de 05/10/2026: candidato até CI do commit convergente e de `main`.
+- Fase 2 — `MVP_PROVEN`: **não iniciada**.
+- Runtime do POD, Privacy Kernel, ADE, Execution Fabric e Capability Engine: **não implementados**.
+
+Documento, aquisição de referência, contrato e modelo formal não são prova de runtime.
+
+## Contratos F1 endurecidos
+
+A base versionada contém:
+
+- `SCHEMAS/v1/pod.proto` — contratos F1 originais;
+- `SCHEMAS/v1/pod_hardening.proto` — prova, Privacy/Sensitive Data, ADE, fencing e Execution Fabric;
+- `SCHEMAS/v1/pod_capability.proto` — Capability Engine;
+- JSON Schemas para estado de missão, contratos de módulo, `DataPolicyEnvelope`, `PrivacyDecision`, `ProofVerdict` e `CapabilityVersion`;
+- TLA+ para missão, gates de prova, lease/fencing e stale worker.
+
+## Capability acquisition V001
+
+Foram preservados o manifesto e catálogo de 19 referências adquiridas no trabalho concorrente de 05/10. O CI atual revalida estrutura, proveniência declarada e zero donor runtime coupling. A verificação física dos bytes externos permanece evidência histórica; os bytes externos não integram o runtime nem o build.
+
+Isto não muda o estado de aquisição de componentes runtime da Baseline.
 
 ## Regra de conclusão
 
-~~~text
+```text
 MISSION_GIVEN
 → MISSION_ACCEPTED
 → WORK
-→ PROOF_VERDICT
+→ EVIDENCE
+→ ACCEPTANCE
+→ REGRESSION
+→ CHECKPOINT
+→ SECURITY/PRIVACY/RECOVERY GATES
+→ FRESH PROOF VERDICT
 → MISSION_PROVEN
-~~~
+```
 
-O Proof Engine avalia evidências. O Mission Core é o único componente que altera o estado soberano da missão. Cérebro, Worker, modelo de IA, painel ou texto não podem declarar conclusão.
+`MISSION_PROVEN` não pode ser inferido de código escrito, build verde, processo rodando, endpoint disponível, commit, painel ou texto de IA.
 
-O executável próprio `pod` será a interface operacional nativa. ChatGPT, MCP e
-provedores de IA serão integrações substituíveis; o núcleo não dependerá deles para
-preservar estado, aplicar regras ou recuperar missões.
+## REUSE FIRST
 
-A decisão completa está em [ADR-009 — Independência do ChatGPT, IA híbrida e
-Terminal Soberano](docs/adr/ADR-009-INDEPENDENCIA-DO-CHATGPT-IA-HIBRIDA-E-TERMINAL-SOBERANO.md).
+```text
+PESQUISAR
+→ ANALISAR
+→ COMPARAR
+→ SELECIONAR
+→ ADQUIRIR
+→ SANITIZAR
+→ NORMALIZAR E QUALIFICAR
+→ CONTEXTUALIZAR
+→ VALIDAR
+→ CONTRATUALIZAR
+→ INTEGRAR
+→ PROVAR
+→ CONSTRUIR SOMENTE O DIFERENCIAL AUSENTE
+```
 
-## Validar a documentação
+## Validar
 
-No diretório raiz:
+```bash
+python3 scripts/validate_governance.py
+python3 scripts/validate_contracts.py
+python3 scripts/validate_capability_acquisition.py
+python3 scripts/validate_formal.py
+python3 -m unittest discover -s tests -v
+```
 
-~~~bash
-python scripts/validate_docs.py
-~~~
+O GitHub Actions executa os mesmos gates.
 
-Resultado esperado:
+## Próxima fase
 
-~~~text
-POD_DOCSET_VALID
-~~~
-
-## Regra de implementação
-
-A stack física e o skeleton só podem ser definidos quando todos os gates documentais de F0 estiverem aprovados. Toda implementação deverá ligar requisito, decisão, contrato, teste, evidência e aceite.
+Somente depois desta reconciliação estar verde e promovida à `main`, uma nova missão pode iniciar a **Fase 2 — fatia vertical mínima**. Esta missão não inicia F2.

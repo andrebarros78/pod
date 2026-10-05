@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/andrebarros78/pod/SCHEMAS/v1/data_policy_envelope.schema.json",
+  "title": "POD DataPolicyEnvelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["data_id", "project_id", "classification", "personal_data", "sensitive_personal_data", "child_or_adolescent_data", "source_ref", "lineage_ref", "purpose_refs", "authority_refs", "allowed_operations", "allowed_destinations", "allowed_projects", "external_processing_allowed", "logging_policy", "encryption_required", "created_at", "policy_version"],
+  "properties": {
+    "data_id": {"type": "string", "minLength": 1},
+    "project_id": {"type": "string", "minLength": 1},
+    "classification": {"enum": ["public", "internal", "confidential", "restricted"]},
+    "personal_data": {"enum": [true, false, "unknown"]},
+    "sensitive_personal_data": {"enum": [true, false, "unknown"]},
+    "child_or_adolescent_data": {"enum": [true, false, "unknown"]},
+    "subject_category": {"type": ["string", "null"]},
+    "controller_ref": {"type": ["string", "null"]},
+    "operator_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "purpose_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "authority_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "source_ref": {"type": "string", "minLength": 1},
+    "lineage_ref": {"type": "string", "minLength": 1},
+    "retention_policy_ref": {"type": ["string", "null"]},
+    "allowed_operations": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "allowed_destinations": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "allowed_projects": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "external_processing_allowed": {"type": "boolean"},
+    "international_transfer_policy_ref": {"type": ["string", "null"]},
+    "logging_policy": {"enum": ["metadata_only", "redacted", "content_allowed"]},
+    "encryption_required": {"type": "boolean"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "policy_version": {"type": "string", "minLength": 1}
+  },
+  "allOf": [
+    {"if": {"properties": {"personal_data": {"const": true}}, "required": ["personal_data"]}, "then": {"properties": {"purpose_refs": {"minItems": 1}, "authority_refs": {"minItems": 1}, "retention_policy_ref": {"type": "string", "minLength": 1}}}},
+    {"if": {"properties": {"sensitive_personal_data": {"const": true}}, "required": ["sensitive_personal_data"]}, "then": {"properties": {"encryption_required": {"const": true}, "classification": {"enum": ["confidential", "restricted"]}}}},
+    {"if": {"properties": {"child_or_adolescent_data": {"const": true}}, "required": ["child_or_adolescent_data"]}, "then": {"properties": {"personal_data": {"const": true}}}}
+  ]
+}

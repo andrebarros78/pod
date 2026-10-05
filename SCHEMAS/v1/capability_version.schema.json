@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/andrebarros78/pod/SCHEMAS/v1/capability_version.schema.json",
+  "title": "POD CapabilityVersion",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["capability_id", "version", "status", "source_ref", "provenance_ref", "license_state", "risk_class", "authority_ceiling", "trigger_rules", "required_context", "eval_pass", "security_pass", "regression_pass", "donor_decoupling_pass", "rollback_ref"],
+  "properties": {
+    "capability_id": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "minLength": 1},
+    "status": {"enum": ["QUARANTINED", "CANDIDATE", "PROMOTED", "SUSPENDED", "REVOKED"]},
+    "source_ref": {"type": "string", "minLength": 1},
+    "provenance_ref": {"type": "string", "minLength": 1},
+    "license_state": {"enum": ["VERIFIED", "BEHAVIOR_ONLY_UNTIL_LICENSE_EXPLICIT", "REJECTED"]},
+    "risk_class": {"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+    "authority_ceiling": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "trigger_rules": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "required_context": {"type": "array", "items": {"type": "string"}},
+    "eval_pass": {"type": "boolean"},
+    "security_pass": {"type": "boolean"},
+    "regression_pass": {"type": "boolean"},
+    "donor_decoupling_pass": {"type": "boolean"},
+    "benchmark_ref": {"type": ["string", "null"]},
+    "rollback_ref": {"type": "string", "minLength": 1}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "PROMOTED"}}, "required": ["status"]},
+      "then": {
+        "properties": {
+          "eval_pass": {"const": true},
+          "security_pass": {"const": true},
+          "regression_pass": {"const": true},
+          "donor_decoupling_pass": {"const": true},
+          "license_state": {"enum": ["VERIFIED", "BEHAVIOR_ONLY_UNTIL_LICENSE_EXPLICIT"]}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"license_state": {"const": "REJECTED"}}, "required": ["license_state"]},
+      "then": {"not": {"properties": {"status": {"const": "PROMOTED"}}, "required": ["status"]}}
+    }
+  ]
+}

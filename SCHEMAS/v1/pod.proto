@@ -1,0 +1,341 @@
+syntax = "proto3";
+
+package pod.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// POD v1 contracts carry identifiers, state and references. Generated content,
+// logs and evidence bytes stay outside the core and are referenced by hash/pointer.
+
+enum TruthState {
+  TRUTH_STATE_UNSPECIFIED = 0;
+  VERIFIED = 1;
+  INFERRED = 2;
+  HYPOTHESIS = 3;
+  NOT_VERIFIED = 4;
+  UNKNOWN = 5;
+}
+
+enum MissionState {
+  MISSION_STATE_UNSPECIFIED = 0;
+  CREATED = 1;
+  CORRELATED = 2;
+  PLANNING = 3;
+  READY = 4;
+  RUNNING = 5;
+  WAITING_DEPENDENCY = 6;
+  WAITING_HUMAN_GATE = 7;
+  RECOVERING = 8;
+  VALIDATING = 9;
+  REGRESSION = 10;
+  FINALIZING = 11;
+  MISSION_PROVEN = 12;
+  BLOCKED_EXTERNAL = 13;
+  CANCELLED = 14;
+  FAILED_UNRECOVERABLE = 15;
+}
+
+enum TaskState {
+  TASK_STATE_UNSPECIFIED = 0;
+  TASK_CREATED = 1;
+  TASK_READY = 2;
+  TASK_RUNNING = 3;
+  TASK_WAITING_DEPENDENCY = 4;
+  TASK_WAITING_RESOURCE = 5;
+  TASK_WAITING_HUMAN_GATE = 6;
+  TASK_RECOVERING = 7;
+  TASK_VALIDATING = 8;
+  TASK_SUCCEEDED = 9;
+  TASK_FAILED = 10;
+  TASK_CANCELLED = 11;
+}
+
+enum RiskLevel {
+  RISK_LEVEL_UNSPECIFIED = 0;
+  LOW = 1;
+  MEDIUM = 2;
+  HIGH = 3;
+  CRITICAL = 4;
+}
+
+enum GitOperation {
+  GIT_OPERATION_UNSPECIFIED = 0;
+  GIT_BRANCH_CREATE = 1;
+  GIT_COMMIT = 2;
+  GIT_PUSH = 3;
+  GIT_MERGE = 4;
+  GIT_TAG = 5;
+  GIT_ROLLBACK = 6;
+}
+
+message HashPointer {
+  string algorithm = 1;
+  string digest = 2;
+  string pointer = 3;
+  uint64 size_bytes = 4;
+}
+
+message AcceptanceContract {
+  repeated string criteria = 1;
+  repeated string required_tests = 2;
+  repeated string required_evidence = 3;
+}
+
+message Project {
+  string project_id = 1;
+  string objective = 2;
+  repeated string in_scope = 3;
+  repeated string out_of_scope = 4;
+  string workspace_ref = 5;
+  string repository_url = 6;
+  RiskLevel risk = 7;
+  string security_profile = 8;
+  AcceptanceContract acceptance = 9;
+  google.protobuf.Timestamp created_at = 10;
+}
+
+message Mission {
+  string mission_id = 1;
+  string project_id = 2;
+  string objective = 3;
+  MissionState state = 4;
+  TruthState truth_state = 5;
+  AcceptanceContract acceptance = 6;
+  repeated string task_ids = 7;
+  string correlation_id = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+message Task {
+  string task_id = 1;
+  string mission_id = 2;
+  string project_id = 3;
+  string objective = 4;
+  TaskState state = 5;
+  repeated string dependency_task_ids = 6;
+  repeated ResourceClaim resource_claims = 7;
+  uint32 preferred_logical_arm = 8;
+  RiskLevel risk = 9;
+}
+
+message TaskEdge {
+  string predecessor_task_id = 1;
+  string successor_task_id = 2;
+}
+
+message TaskGraph {
+  string mission_id = 1;
+  repeated Task tasks = 2;
+  repeated TaskEdge edges = 3;
+}
+
+message Command {
+  string command_id = 1;
+  string project_id = 2;
+  string mission_id = 3;
+  string command_type = 4;
+  HashPointer payload_ref = 5;
+  string idempotency_key = 6;
+  string authorization_ref = 7;
+  google.protobuf.Timestamp received_at = 8;
+}
+
+message Event {
+  string event_id = 1;
+  string aggregate_type = 2;
+  string aggregate_id = 3;
+  string event_type = 4;
+  HashPointer data_ref = 5;
+  google.protobuf.Timestamp occurred_at = 6;
+}
+
+message StateTransition {
+  string transition_id = 1;
+  string aggregate_type = 2;
+  string aggregate_id = 3;
+  string from_state = 4;
+  string to_state = 5;
+  string reason = 6;
+  string authority_ref = 7;
+  google.protobuf.Timestamp occurred_at = 8;
+}
+
+message ExecutionRequest {
+  string execution_id = 1;
+  string task_id = 2;
+  string mission_id = 3;
+  string project_id = 4;
+  string capability = 5;
+  uint32 logical_arm = 6;
+  HashPointer instruction_ref = 7;
+  repeated ResourceClaim resource_claims = 8;
+  string authorization_ref = 9;
+}
+
+message ExecutionLease {
+  string lease_id = 1;
+  string execution_id = 2;
+  string holder_node_id = 3;
+  uint64 generation = 4;
+  uint64 fencing_token = 5;
+  google.protobuf.Timestamp issued_at = 6;
+  google.protobuf.Timestamp expires_at = 7;
+}
+
+message ExecutionEvent {
+  string execution_event_id = 1;
+  string execution_id = 2;
+  string event_type = 3;
+  HashPointer detail_ref = 4;
+  google.protobuf.Timestamp occurred_at = 5;
+}
+
+message ExecutionResult {
+  string execution_id = 1;
+  string task_id = 2;
+  bool success = 3;
+  int32 exit_code = 4;
+  HashPointer stdout_ref = 5;
+  HashPointer stderr_ref = 6;
+  repeated EvidenceRecord evidence = 7;
+  google.protobuf.Timestamp completed_at = 8;
+}
+
+message CapabilityDescriptor {
+  string capability_id = 1;
+  string name = 2;
+  string version = 3;
+  repeated string operations = 4;
+  repeated string constraints = 5;
+}
+
+message ArmDescriptor {
+  uint32 logical_arm = 1;
+  uint32 block = 2;
+  string specialty = 3;
+  repeated string languages_or_domains = 4;
+  bool coordinator = 5;
+}
+
+message NodeIdentity {
+  string node_id = 1;
+  string hostname = 2;
+  string operating_system = 3;
+  string architecture = 4;
+  repeated CapabilityDescriptor capabilities = 5;
+}
+
+message NodeHeartbeat {
+  string node_id = 1;
+  google.protobuf.Timestamp observed_at = 2;
+  double cpu_used_ratio = 3;
+  double memory_used_ratio = 4;
+  double disk_used_ratio = 5;
+  uint32 active_executions = 6;
+}
+
+message ResourceClaim {
+  string resource_type = 1;
+  string resource_id = 2;
+  string mode = 3;
+  uint64 quantity = 4;
+}
+
+message AuthorizationGrant {
+  string authorization_id = 1;
+  string subject = 2;
+  string action = 3;
+  string scope = 4;
+  string task_id = 5;
+  google.protobuf.Timestamp granted_at = 6;
+  google.protobuf.Timestamp expires_at = 7;
+}
+
+message AuthorizationDenial {
+  string authorization_id = 1;
+  string subject = 2;
+  string action = 3;
+  string scope = 4;
+  string reason = 5;
+  google.protobuf.Timestamp denied_at = 6;
+}
+
+message Checkpoint {
+  string checkpoint_id = 1;
+  string project_id = 2;
+  string mission_id = 3;
+  HashPointer state_ref = 4;
+  repeated HashPointer artifact_refs = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message EvidenceRecord {
+  string evidence_id = 1;
+  string evidence_type = 2;
+  HashPointer content_ref = 3;
+  TruthState truth_state = 4;
+  string producer = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message Incident {
+  string incident_id = 1;
+  string mission_id = 2;
+  string task_id = 3;
+  RiskLevel severity = 4;
+  string category = 5;
+  string summary = 6;
+  google.protobuf.Timestamp detected_at = 7;
+}
+
+message RecoveryAction {
+  string recovery_action_id = 1;
+  string incident_id = 2;
+  string action_type = 3;
+  string target = 4;
+  bool automatic = 5;
+  HashPointer result_ref = 6;
+  google.protobuf.Timestamp executed_at = 7;
+}
+
+message GitIntent {
+  string git_intent_id = 1;
+  string project_id = 2;
+  string mission_id = 3;
+  GitOperation operation = 4;
+  string repository_url = 5;
+  string branch = 6;
+  string base_ref = 7;
+  string target_ref = 8;
+  string expected_remote_sha = 9;
+}
+
+message ArtifactManifest {
+  string artifact_id = 1;
+  string project_id = 2;
+  string mission_id = 3;
+  string artifact_type = 4;
+  HashPointer content_ref = 5;
+  repeated HashPointer dependency_refs = 6;
+}
+
+message KnowledgeRecord {
+  string knowledge_id = 1;
+  string project_id = 2;
+  string scope = 3;
+  HashPointer source_ref = 4;
+  TruthState truth_state = 5;
+  string provenance = 6;
+  google.protobuf.Timestamp observed_at = 7;
+  google.protobuf.Timestamp valid_until = 8;
+}
+
+message ProviderDescriptor {
+  string provider_id = 1;
+  string provider_type = 2;
+  string model_or_service = 3;
+  repeated string capabilities = 4;
+  repeated string constraints = 5;
+  string credential_ref = 6;
+}

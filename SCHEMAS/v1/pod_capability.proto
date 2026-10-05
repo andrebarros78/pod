@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package pod.v1;
+
+import "google/protobuf/timestamp.proto";
+import "pod.proto";
+
+enum CapabilityLifecycleState {
+  CAPABILITY_LIFECYCLE_STATE_UNSPECIFIED = 0;
+  CAPABILITY_QUARANTINED = 1;
+  CAPABILITY_CANDIDATE = 2;
+  CAPABILITY_PROMOTED = 3;
+  CAPABILITY_SUSPENDED = 4;
+  CAPABILITY_REVOKED = 5;
+}
+
+message CapabilityVersion {
+  string capability_id = 1;
+  string version = 2;
+  CapabilityLifecycleState state = 3;
+  string source_ref = 4;
+  string provenance_ref = 5;
+  string license_state = 6;
+  string risk_class = 7;
+  repeated string authority_ceiling = 8;
+  repeated string trigger_rules = 9;
+  repeated string required_context = 10;
+  repeated string required_tool_capabilities = 11;
+  string eval_suite_ref = 12;
+  string benchmark_ref = 13;
+  string rollback_ref = 14;
+  google.protobuf.Timestamp last_validation = 15;
+}
+
+message CapabilityEvaluation {
+  string evaluation_id = 1;
+  string capability_id = 2;
+  string version = 3;
+  bool functional_pass = 4;
+  bool trigger_selection_pass = 5;
+  bool security_pass = 6;
+  bool regression_pass = 7;
+  bool donor_decoupling_pass = 8;
+  bool authority_boundary_pass = 9;
+  bool benchmark_pass = 10;
+  repeated EvidenceRecord evidence = 11;
+  google.protobuf.Timestamp evaluated_at = 12;
+}
+
+message CapabilityPromotionDecision {
+  string promotion_id = 1;
+  string capability_id = 2;
+  string candidate_version = 3;
+  string previous_promoted_version = 4;
+  string evaluation_id = 5;
+  bool promoted = 6;
+  repeated string reason_codes = 7;
+  string policy_version = 8;
+  google.protobuf.Timestamp decided_at = 9;
+}
+
+message CapabilityLoadRequest {
+  string request_id = 1;
+  string mission_id = 2;
+  string task_id = 3;
+  string capability_id = 4;
+  string version = 5;
+  uint32 level = 6;
+  repeated string context_refs = 7;
+  string authorization_ref = 8;
+}
