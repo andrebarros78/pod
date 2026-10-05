@@ -1,9 +1,8 @@
 {
   "schema_version": 1,
   "release_id": "POD-F1-HARDENING-2026-10-05",
-  "status": "CANDIDATE_CONVERGENCE",
+  "status": "PROVEN",
   "canonical_target_branch": "main",
-  "source_branch": "reconcile/f1-hardening-privacy-20261005",
   "scope": [
     "privacy_sensitive_data_reconciliation",
     "proof_verdict_hardening",
@@ -17,9 +16,17 @@
   "runtime_implementation_claimed": false,
   "phase_2_started": false,
   "premerge_candidate_commit": "f65a2b34cfbc8ca427fd4943f8b676de2e5b80ee",
-  "premerge_candidate_run": 37344078596,
   "concurrent_main_commit": "2d4ccddff3c59c257424f365af38b376d24b4687",
-  "validated_commit": null,
-  "github_actions_run": null,
-  "github_actions_status": "NOT_VERIFIED"
+  "validated_commit": "180d98575ed9effe7b192a9285c2ef8a7d553863",
+  "candidate_github_actions_run": 37345339206,
+  "canonical_main_github_actions_run": 37345457823,
+  "github_actions_status": "SUCCESS",
+  "tests_passed": 20,
+  "tests_failed": 0,
+  "tla_generated_states": 3735315,
+  "tla_distinct_states": 755806,
+  "tla_states_left": 0,
+  "capability_reference_sources": 19,
+  "donor_runtime_coupling": 0,
+  "external_source_bytes_reverified_in_ci": false
 }

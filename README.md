@@ -17,15 +17,15 @@ A ordem operacional de leitura é:
 7. [`RUNBOOKS/`](RUNBOOKS/), [`EVIDENCE/`](EVIDENCE/) e [`RELEASES/`](RELEASES/) — operação, prova e releases;
 8. [`HISTORY/`](HISTORY/) — histórico com `NORMATIVE=false`.
 
-Nenhuma branch de trabalho substitui `main` como fonte canônica após promoção e validação.
+Nenhuma branch de trabalho substitui `main` como fonte canônica.
 
-## Estado atual desta reconciliação
+## Estado comprovado
 
-- Fase 0 — `BASELINE_RECONCILED`: comprovada.
-- Fase 1 — `CORE_CONTRACTS_DEFINED`: comprovada no escopo contratual/formal anterior.
-- Hardening F1 de 05/10/2026: candidato até CI do commit convergente e de `main`.
-- Fase 2 — `MVP_PROVEN`: **não iniciada**.
-- Runtime do POD, Privacy Kernel, ADE, Execution Fabric e Capability Engine: **não implementados**.
+- Fase 0 — `BASELINE_RECONCILED`: **PROVEN**.
+- Fase 1 — `CORE_CONTRACTS_DEFINED`: **PROVEN**.
+- Hardening F1 de 05/10/2026 — Privacy/Sensitive Data, prova, fencing, ADE, Execution Fabric e Capability Engine: **PROVEN**.
+- Fase 2 — `MVP_PROVEN`: **NOT_STARTED**.
+- Runtime do POD, Privacy Kernel, ADE, Execution Fabric e Capability Engine: **NOT_IMPLEMENTED**.
 
 Documento, aquisição de referência, contrato e modelo formal não são prova de runtime.
 
@@ -41,7 +41,7 @@ A base versionada contém:
 
 ## Capability acquisition V001
 
-Foram preservados o manifesto e catálogo de 19 referências adquiridas no trabalho concorrente de 05/10. O CI atual revalida estrutura, proveniência declarada e zero donor runtime coupling. A verificação física dos bytes externos permanece evidência histórica; os bytes externos não integram o runtime nem o build.
+Foram preservados o manifesto e catálogo de 19 referências adquiridas no trabalho concorrente de 05/10. A raiz canônica revalida estrutura, proveniência declarada e zero donor runtime coupling. A verificação física dos bytes externos permanece evidência histórica; os bytes externos não integram runtime nem build.
 
 Isto não muda o estado de aquisição de componentes runtime da Baseline.
 
@@ -92,6 +92,6 @@ python3 -m unittest discover -s tests -v
 
 O GitHub Actions executa os mesmos gates.
 
-## Próxima fase
+## Continuidade
 
-Somente depois desta reconciliação estar verde e promovida à `main`, uma nova missão pode iniciar a **Fase 2 — fatia vertical mínima**. Esta missão não inicia F2.
+O próximo trabalho autorizado pelo baseline é uma **nova missão de Fase 2 — fatia vertical mínima**, iniciada a partir de `main`. Esta reconciliação não iniciou F2.
